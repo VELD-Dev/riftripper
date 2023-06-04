@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiftRipper", "RiftRipper\RiftRipper.csproj", "{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RiftRipperLib", "RiftRipperLib\RiftRipperLib.csproj", "{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		LINUX|Any CPU = LINUX|Any CPU
+		MACOS|Any CPU = MACOS|Any CPU
+		Release|Any CPU = Release|Any CPU
+		WINDOWS|Any CPU = WINDOWS|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.LINUX|Any CPU.ActiveCfg = LINUX|Any CPU
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.LINUX|Any CPU.Build.0 = LINUX|Any CPU
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.MACOS|Any CPU.ActiveCfg = LINUX|Any CPU
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.WINDOWS|Any CPU.ActiveCfg = Release|Any CPU
+		{C096CAA1-E6E4-4289-B58F-CF842DD1AABF}.WINDOWS|Any CPU.Build.0 = Release|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.LINUX|Any CPU.ActiveCfg = Release|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.LINUX|Any CPU.Build.0 = Release|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.MACOS|Any CPU.ActiveCfg = Release|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.MACOS|Any CPU.Build.0 = Release|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.WINDOWS|Any CPU.ActiveCfg = Release|Any CPU
+		{6A51B8C9-F65A-4CDA-9E80-2FEE5E4535C8}.WINDOWS|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47684EA8-E0E1-44CA-AC3C-D96F6C8F591E}
+	EndGlobalSection
+EndGlobal

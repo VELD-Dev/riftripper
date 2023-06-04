@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RiftRipper.Frames;
+﻿namespace RiftRipper.Frames;
 
 /// <summary>
 /// Frame (window) inside the viewport

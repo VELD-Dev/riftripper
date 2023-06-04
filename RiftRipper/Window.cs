@@ -1,7 +1,4 @@
-﻿using RiftRipper.Utility;
-using System.Diagnostics;
-
-namespace RiftRipper;
+﻿namespace RiftRipper;
 
 public class Window : GameWindow
 {

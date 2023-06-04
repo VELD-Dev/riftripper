@@ -1,7 +1,4 @@
-﻿using OpenTK.Windowing.GraphicsLibraryFramework;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using ErrorCode = OpenTK.Graphics.OpenGL4.ErrorCode;
+﻿using ErrorCode = OpenTK.Graphics.OpenGL4.ErrorCode;
 
 namespace RiftRipper.Utility;
 

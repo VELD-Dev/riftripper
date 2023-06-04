@@ -173,22 +173,22 @@ public class Window : GameWindow
 
                 if (ImGui.BeginMenu("Tools"))
                 {
-                    if (ImGui.MenuItem("Create a local portal (R&C:Rift Apart only)", "P", false, false))
+                    if (ImGui.MenuItem("Create a local portal (R&C:RA only)", "P", false, false))
                     {
                         Console.WriteLine("Opening portal creation modal !");
                     }
 
-                    if(ImGui.MenuItem("Create a displacement portal (R&C:Rift Apart only)", "SHIFT+P", false, false))
+                    if(ImGui.MenuItem("Create a displacement portal (R&C:RA only)", "SHIFT+P", false, false))
                     {
                         Console.WriteLine("Opening displacement portal creation modal !");
                     }
 
-                    if (ImGui.MenuItem("Create a level portal (R&C:Rift Apart only)", "L", false, false))
+                    if (ImGui.MenuItem("Create a level portal (R&C:RA only)", "L", false, false))
                     {
                         Console.WriteLine("Opening levels portal creation modal !");
                     }
 
-                    if (ImGui.MenuItem("Create a pocket rift portal (R&C: Rift Apart only)", "SHIFT+L", false, false))
+                    if (ImGui.MenuItem("Create a pocket rift portal (R&C:RA only)", "SHIFT+L", false, false))
                     {
                         Console.WriteLine("Opening pocket rift portal creation modal !");
                     }

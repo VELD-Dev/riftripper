@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -8,8 +8,24 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <IsPublishable>False</IsPublishable>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Configurations>Debug;Release;WINDOWS;LINUX</Configurations>
+    <Configurations>Debug All;Release;WINDOWS;LINUX;Debug</Configurations>
     <SignAssembly>True</SignAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <DefineConstants>WIN</DefineConstants>
+  </PropertyGroup>
+
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug All|AnyCPU'">
+    <DefineConstants>$(DefineConstants);WIN;LINUX</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WINDOWS|AnyCPU'">
@@ -23,10 +39,21 @@
   <ItemGroup>
     <PackageReference Include="ImGui.NET" Version="1.89.5" />
     <PackageReference Include="OpenTK" Version="4.7.7" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.0-preview.2.23128.3" />
+    <PackageReference Include="Veldrid" Version="4.9.0" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir &quot;$(OutDir)\Shaders&quot;&#xD;&#xA;copy /Y &quot;$(ProjectDir)\Shaders&quot; &quot;$(OutDir)\Shaders&quot;" />
-  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\RiftRipperLib\RiftRipperLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Shaders\standard.vert.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Shaders\standardunlit.frag.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>

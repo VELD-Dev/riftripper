@@ -1,18 +1,41 @@
-﻿namespace RiftRipper;
+﻿using System.ComponentModel;
+using FileDialog = RiftRipper.Utility.FileDialog;
+
+namespace RiftRipper;
 
 public class Window : GameWindow
 {
     public string oglVersionString = "Unkown OpenGL version";
-
     private ImGuiController controller;
+    private List<Frame> openFrames;
+
+
     public string[] args { get; private set; }
 
     public Window(string[] args) : base(GameWindowSettings.Default,
-        new() { Size = new(1600, 900), APIVersion = new(4, 6), Flags = ContextFlags.ForwardCompatible, Profile = ContextProfile.Core, Vsync = VSyncMode.On})
+        new() { Size = new(1600, 900), APIVersion = new(4, 6), Flags = ContextFlags.ForwardCompatible, Profile = ContextProfile.Core })
     {
         this.args = args;
+        this.VSync = VSyncMode.On;
+        openFrames = new List<Frame>();
         
-        
+    }
+
+    public void AddFrame(Frame frame)
+    {
+        openFrames.Add(frame);
+    }
+
+    public static bool FrameMustClose(Frame frame)
+    {
+        return !frame.isOpen;
+    }
+
+    protected override void OnClosing(CancelEventArgs e)
+    {
+        // TODO: Add a "Do not forget to save!" window after if there's a project.
+        Environment.Exit(0);
+        base.OnClosing(e);
     }
 
     protected override void OnLoad()
@@ -77,6 +100,8 @@ public class Window : GameWindow
     {
         base.OnRenderFrame(args);
 
+        openFrames.RemoveAll(FrameMustClose);
+
         GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
 
         controller?.Update(this, (float)args.Time);
@@ -135,6 +160,7 @@ public class Window : GameWindow
 
                 if (ImGui.MenuItem("Create a Rift project", "CTRL+P"))
                 {
+                    AddFrame(new CreateProjectFrame(this));
                     Console.WriteLine("Should open project creation menu");
                 }
 
@@ -213,6 +239,18 @@ public class Window : GameWindow
                 }
                 ImGui.EndMenu();
             }
+
+#if DEBUG
+            if (ImGui.BeginMenu("Debug"))
+            {
+                if (ImGui.MenuItem("Demo frame"))
+                {
+                    AddFrame(new DemoWindowFrame(this));
+                }
+                ImGui.EndMenu();
+            }
+#endif
+
             ImGui.EndMainMenuBar();
         }
     }
@@ -220,5 +258,8 @@ public class Window : GameWindow
     private void RenderUI(float deltaTime)
     {
         RenderMenuBar();
+
+        foreach (Frame frame in openFrames)
+            frame.RenderAsWindow(deltaTime);
     }
 }

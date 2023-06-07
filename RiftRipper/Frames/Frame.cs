@@ -9,7 +9,7 @@ public abstract class Frame
     protected abstract string frameName { get; set; }
     public bool isOpen = true;
     private uint frameId;
-    private static uint frameIdSource { get { return FRAME_ID_SOURCE++; } }
+    private static uint frameIDSource { get { return FRAME_ID_SOURCE++; } }
     private static uint FRAME_ID_SOURCE = 0;
 
     /// <summary>
@@ -19,7 +19,7 @@ public abstract class Frame
     public Frame(Window window)
     {
         this.window = window;
-        frameId = frameIdSource;
+        frameId = frameIDSource;
         SetWindowTitle(frameName);
     }
 
@@ -42,9 +42,9 @@ public abstract class Frame
     /// Render the frame as a window
     /// </summary>
     /// <param name="deltaTime">Delta time</param>
-    public virtual void RenderAsWindow(float deltaTime)
+    public virtual void RenderAsWindow(float deltaTime, ImGuiWindowFlags windowFlag = ImGuiWindowFlags.None)
     {
-        if(ImGui.Begin(frameName, ref isOpen))
+        if(ImGui.Begin(frameName, ref isOpen, windowFlag))
         {
             Render(deltaTime);
             ImGui.End();

@@ -1,4 +1,6 @@
-﻿namespace RiftRipper.Utility;
+﻿using System.Windows.Forms;
+
+namespace RiftRipper.Utility;
 
 public static class FileDialog
 {

@@ -1,4 +1,7 @@
 ﻿using ErrorCode = OpenTK.Graphics.OpenGL4.ErrorCode;
+using Keys = OpenTK.Windowing.GraphicsLibraryFramework.Keys;
+using Vector2 = OpenTK.Mathematics.Vector2;
+using PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat;
 
 namespace RiftRipper.Utility;
 
@@ -75,7 +78,7 @@ public class ImGuiController : IDisposable
         int prevVAO = GL.GetInteger(GetPName.VertexArrayBinding);
         int prevArrayBuffer = GL.GetInteger(GetPName.ArrayBufferBinding);
 
-        _vertexArray = GL.GenVertexArray();
+        _vertexArray = (int)GL.GenVertexArray();
         GL.BindVertexArray(_vertexArray);
         LabelObject(ObjectLabelIdentifier.VertexArray, _vertexArray, "ImGui");
 

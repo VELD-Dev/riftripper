@@ -12,6 +12,9 @@ public class DemoWindowFrame : Frame
     public DemoWindowFrame(Window wnd) : base(wnd) { }
 
     public override void Render(float deltaTime)
+    {}
+
+    public override void RenderAsWindow(float deltaTime, ImGuiWindowFlags windowFlag = ImGuiWindowFlags.None)
     {
         ImGui.ShowDemoWindow(ref isOpen);
     }

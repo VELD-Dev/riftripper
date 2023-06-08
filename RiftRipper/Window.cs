@@ -8,6 +8,9 @@ public class Window : GameWindow
     public string oglVersionString = "Unkown OpenGL version";
     private ImGuiController controller;
     private List<Frame> openFrames;
+    public Project openedProject;
+    internal bool showFramerate = false;
+    internal float Framerate;
 
 
     public string[] args { get; private set; }
@@ -83,6 +86,13 @@ public class Window : GameWindow
                 }
             }
         }
+
+        // Setting ImGui default settings
+        ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0f);
+        ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 5f);
+        ImGui.PushStyleVar(ImGuiStyleVar.TabRounding, 5f);
+        ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 2.5f);
+        ImGui.PushStyleVar(ImGuiStyleVar.GrabRounding, 2.5f);
     }
 
     protected override void OnResize(ResizeEventArgs e)
@@ -108,6 +118,13 @@ public class Window : GameWindow
 
         RenderUI((float)args.Time);
 
+        if(showFramerate)
+        {
+            Overlays.ShowOverlay(this, showFramerate);
+        }
+
+        Title = openedProject is not null ? $"RiftRipper {Program.version} ({oglVersionString}) - Project {openedProject.Name} {openedProject.Version} by {openedProject.Author}" : $"RiftRipper {Program.version} ({oglVersionString})";
+
         GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
         GL.ClearColor(new Color4(48, 48, 48, 255));
         GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit);
@@ -115,6 +132,14 @@ public class Window : GameWindow
         controller?.Render();
 
         SwapBuffers();
+    }
+
+    protected override void OnUpdateFrame(FrameEventArgs args)
+    {
+        if(showFramerate)
+            Framerate = (float)Math.Round(1 / (float)args.Time, 1);
+
+        base.OnUpdateFrame(args);
     }
 
     protected override void OnTextInput(TextInputEventArgs e)
@@ -169,8 +194,21 @@ public class Window : GameWindow
                     var res = FileDialog.OpenFile("Open project", ".rift");
                     if (res.Length > 0)
                     {
-                        Console.WriteLine($"File found: {res[0]}");
+                        try
+                        {
+                            this.openedProject = Project.OpenFromFile(res);
+                        }
+                        catch(Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
                     }
+                }
+
+                if(openedProject != null)
+                {
+                    if(ImGui.MenuItem("Close the active project", "SHIFT+ALT+P"))
+                        openedProject = null;
                 }
 
                 ImGui.Separator();
@@ -190,8 +228,9 @@ public class Window : GameWindow
                     Console.WriteLine("Should open editor settings menu");
                 }
 
-                if (ImGui.MenuItem("Project settings", "CTRL+SHIFT+P", false, false))
+                if (ImGui.MenuItem("Project settings", "CTRL+SHIFT+P", false, openedProject != null))
                 {
+                    AddFrame(new ProjectSettingsFrame(this, openedProject));
                     Console.WriteLine("Should open project settings");
                 }
 
@@ -227,7 +266,9 @@ public class Window : GameWindow
 
             if (ImGui.BeginMenu("View"))
             {
-                ImGui.SeparatorText("Coming soon...");
+                if (ImGui.MenuItem("Show framerate", "", showFramerate, true))
+                    showFramerate = !showFramerate;
+
                 ImGui.EndMenu();
             }
 

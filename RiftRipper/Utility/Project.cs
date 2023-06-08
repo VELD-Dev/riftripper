@@ -46,7 +46,6 @@ public class Project
         Description = description;
         Version = version;
         Author = author;
-        Id = id;
         AuthorUrl = authorUrl;
     }
 

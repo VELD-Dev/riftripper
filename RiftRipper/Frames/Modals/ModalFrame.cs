@@ -1,9 +1,12 @@
-﻿namespace RiftRipper.Frames;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-/// <summary>
-/// Frame (window) inside the viewport
-/// </summary>
-public abstract class Frame
+namespace RiftRipper.Frames.Modals;
+
+public abstract class Modal
 {
     protected Window window;
     protected abstract string frameName { get; set; }
@@ -17,7 +20,7 @@ public abstract class Frame
     /// Create a new frame
     /// </summary>
     /// <param name="window">Window data</param>
-    public Frame(Window window)
+    public Modal(Window window)
     {
         this.window = window;
         frameId = frameIDSource;
@@ -45,10 +48,10 @@ public abstract class Frame
     /// <param name="deltaTime">Delta time</param>
     public virtual void RenderAsWindow(float deltaTime)
     {
-        if(ImGui.Begin(frameName, ref isOpen, window_flags))
+        if (ImGui.BeginPopupModal(frameName, ref isOpen, window_flags))
         {
             Render(deltaTime);
-            ImGui.End();
+            ImGui.EndPopup();
         }
     }
 }

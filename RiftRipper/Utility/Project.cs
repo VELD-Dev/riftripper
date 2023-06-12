@@ -1,13 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Newtonsoft;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using Microsoft.Win32.SafeHandles;
-
-namespace RiftRipper.Utility;
+﻿namespace RiftRipper.Utility;
 
 public enum Games
 {
@@ -24,13 +15,13 @@ public class Project
 {
 
     public readonly string Id;
-    public required string Name { get; set; }
-    public required string Author { get; set; }
-    public required string SourceLevelPath { get; set; }
-    public Games Game { get; set; } = Games.Undefined;
-    public string Description { get; set; }
-    public string Version { get; set; }
-    public string AuthorUrl { get; set; } = string.Empty;
+    public required string Name;
+    public required string Author;
+    public required string SourceLevelPath;
+    public Games Game = Games.Undefined;
+    public string Description;
+    public string Version;
+    public string AuthorUrl = string.Empty;
 
     [SetsRequiredMembers]
     public Project(string id)
@@ -59,7 +50,40 @@ public class Project
 
     public static Project OpenFromFile(string path)
     {
-        Project projectToLoad = JsonConvert.DeserializeObject<Project>(File.ReadAllText(path));
-        return (Project)projectToLoad;
+        if(File.Exists(path))
+        {
+            Project projectToLoad = JsonConvert.DeserializeObject<Project>(File.ReadAllText(path));
+            return (Project)projectToLoad;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Try opening a project from file.
+    /// </summary>
+    /// <param name="path">Path to the rift file.</param>
+    /// <param name="project">Null if the file does not exist, otherwise an instance of the project.</param>
+    /// <returns>True if the file exists, false if not.</returns>
+    public static bool TryOpenFromFile(string path, out Project project)
+    {
+        if(!path.EndsWith(".rift"))
+        {
+            Console.WriteLine("The provided file is not a .rift project file !");
+            project = null;
+            return false;
+        }
+        if (File.Exists(path))
+        {
+            project = JsonConvert.DeserializeObject<Project>(File.ReadAllText(path));
+            return true;
+        }
+        else
+        {
+            project = null;
+            return false;
+        }
     }
 }

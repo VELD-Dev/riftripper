@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using FileDialog = RiftRipper.Utility.FileDialog;
+﻿using FileDialog = RiftRipper.Utility.FileDialog;
 
 namespace RiftRipper;
 
@@ -9,6 +8,7 @@ public class Window : GameWindow
     private ImGuiController controller;
     private List<Frame> openFrames;
     public Project openedProject;
+    public EditorConfigs Settings = EditorConfigs.TryLoadOrCreateSettings(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Settings.json"));
     internal bool showFramerate = false;
     internal float Framerate;
 
@@ -21,7 +21,6 @@ public class Window : GameWindow
         this.args = args;
         this.VSync = VSyncMode.On;
         openFrames = new List<Frame>();
-        
     }
 
     public void AddFrame(Frame frame)
@@ -225,7 +224,8 @@ public class Window : GameWindow
             {
                 if (ImGui.MenuItem("Editor settings", "CTRL+SHIFT+E"))
                 {
-                    Console.WriteLine("Should open editor settings menu");
+                    AddFrame(new EditorSettingsFrame(this));
+                    Console.WriteLine("Should open editor settings");
                 }
 
                 if (ImGui.MenuItem("Project settings", "CTRL+SHIFT+P", false, openedProject != null))
@@ -281,16 +281,17 @@ public class Window : GameWindow
                 ImGui.EndMenu();
             }
 
-#if DEBUG
-            if (ImGui.BeginMenu("Debug"))
+            if (Settings.DebugMode)
             {
-                if (ImGui.MenuItem("Demo frame"))
+                if (ImGui.BeginMenu("Debug"))
                 {
-                    AddFrame(new DemoWindowFrame(this));
+                    if (ImGui.MenuItem("Demo frame"))
+                    {
+                        AddFrame(new DemoWindowFrame(this));
+                    }
+                    ImGui.EndMenu();
                 }
-                ImGui.EndMenu();
             }
-#endif
 
             ImGui.EndMainMenuBar();
         }

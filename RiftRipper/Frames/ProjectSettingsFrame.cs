@@ -10,6 +10,7 @@ namespace RiftRipper.Frames;
 public class ProjectSettingsFrame : Frame
 {
     protected override string frameName { get; set; } = "Project settings";
+    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize;
     public required Project loadedProject { get; set; }
 
     [SetsRequiredMembers]
@@ -29,10 +30,10 @@ public class ProjectSettingsFrame : Frame
         ImGui.Text(loadedProject.Name);
     }
 
-    public override void RenderAsWindow(float deltaTime, ImGuiWindowFlags windowFlag = ImGuiWindowFlags.None)
+    public override void RenderAsWindow(float deltaTime)
     {
         ImGui.SetWindowSize(new System.Numerics.Vector2(800, 600));
-        base.RenderAsWindow(deltaTime, ImGuiWindowFlags.NoResize);
+        base.RenderAsWindow(deltaTime);
     }
 
 }

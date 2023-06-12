@@ -78,7 +78,7 @@ public static class FileDialog
         if (File.Exists(fileName))
             return true;
 
-        String? values = Environment.GetEnvironmentVariable("PATH");
+        String values = Environment.GetEnvironmentVariable("PATH");
 
         if (values != null)
         {
@@ -121,7 +121,7 @@ public static class FileDialog
 
     private static class KDialog
     {
-        private static string RunKDialog(List<string>? args = null, Dictionary<string, string>? kwargs = null)
+        private static string RunKDialog(List<string> args = null, Dictionary<string, string> kwargs = null)
         {
             List<string> zArgs = new List<string>();
             if (args != null)
@@ -167,7 +167,7 @@ public static class FileDialog
 
     private static class Zenity
     {
-        private static string RunZenity(List<string>? args = null, Dictionary<string, string>? kwargs = null)
+        private static string RunZenity(List<string> args = null, Dictionary<string, string> kwargs = null)
         {
             List<string> zArgs = new List<string>();
             if (args != null)

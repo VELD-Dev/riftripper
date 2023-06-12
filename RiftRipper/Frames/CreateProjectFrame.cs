@@ -7,6 +7,7 @@ namespace RiftRipper.Frames;
 public class CreateProjectFrame : Frame
 {
     protected override string frameName { get; set; } = "Create a project";
+    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.Modal | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
 
     public string projectId = "";
     public string projectName = "";
@@ -16,10 +17,7 @@ public class CreateProjectFrame : Frame
     public string projectVersion = "1.0.0";
     public string projectDescription = "Let's rip it out!";
 
-    public CreateProjectFrame(Window wnd) : base(wnd)
-    {
-        
-    }
+    public CreateProjectFrame(Window wnd) : base(wnd) { }
 
 
     private bool HasCustomisedPath = false;
@@ -174,10 +172,9 @@ public class CreateProjectFrame : Frame
         ImGui.EndGroup();
     }
 
-    public override void RenderAsWindow(float deltaTime, ImGuiWindowFlags windowFlag = ImGuiWindowFlags.None)
+    public override void RenderAsWindow(float deltaTime)
     {
         ImGui.SetNextWindowSize(new System.Numerics.Vector2(800, 600));
-        ImGui.SetNextWindowSizeConstraints(new System.Numerics.Vector2(16, 16), new System.Numerics.Vector2(1280, 720));
-        base.RenderAsWindow(deltaTime, ImGuiWindowFlags.NoResize);
+        base.RenderAsWindow(deltaTime);
     }
 }

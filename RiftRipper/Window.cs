@@ -86,6 +86,8 @@ public class Window : GameWindow
             }
         }
 
+        FontsManager.LoadDefaultFont("KanitRegular", Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Assets", "Fonts", "Kanit", "Kanit-Regular.ttf"));
+
         // Setting ImGui default settings
         ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0f);
         ImGui.PushStyleVar(ImGuiStyleVar.WindowRounding, 5f);
@@ -159,7 +161,6 @@ public class Window : GameWindow
     {
         if (ImGui.BeginMainMenuBar())
         {
-
             if (ImGui.BeginMenu("File"))
             {
                 if (ImGui.MenuItem("Open level", "CTRL+L"))

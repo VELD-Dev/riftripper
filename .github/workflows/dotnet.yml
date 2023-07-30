@@ -52,7 +52,7 @@ jobs:
         dotnet publish RiftRipper/RiftRipper.csproj --runtime "${{ matrix.target }}" -f=net7.0 -c "${{ matrix.kind }}" -o "${{ env.GITHUB_WORKSPACE }}/${release_name}"
         echo "published"
         
-        if [ -d "$release_name" ]; then
+        if [ -d "${{ env.GITHUB_WORKSPACE }}/${release_name}" ]; then
           echo "dir exists"
         else
           echo "dir does not exist"
@@ -60,9 +60,9 @@ jobs:
         
         # Pack files
         if [ "${{ matrix.target }}" == "win-x64" ]; then
-          7z a -tzip "${release_name}.zip" "./${release_name}/*"
+          7z a -tzip "${release_name}.zip" "${{ env.GITHUB_WORKSPACE }}/${release_name}/*"
         else
-          tar czvf "${release_name}.tar.gz" "./${release_name}/"
+          tar czvf "${release_name}.tar.gz" "${{ env.GITHUB_WORKSPACE }}/${release_name}/"
         fi
         echo "compressed"
         

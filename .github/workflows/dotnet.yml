@@ -45,6 +45,7 @@ jobs:
         build_date=$(date +'%d-%m-%Y')
         release_name="RiftRipper-nightly-${build_date}.${commit_hash}.${{ matrix.target }}"
         echo "$release_name"
+        ls -R
         
         # Build
         dotnet publish RiftRipper/RiftRipper.csproj --runtime "${{ matrix.target }}" -f=net7.0 -c "${{ matrix.kind }}" -o "$release_name"

@@ -46,7 +46,6 @@ jobs:
         # Define variables
         commit_hash=$(git rev-parse --short "$GITHUB_SHA")
         release_name="RiftRipper-nightly-${commit_hash}.${{ matrix.target }}"
-        echo "$release_name"
         
         # Build
         dotnet publish RiftRipper/RiftRipper.csproj --runtime "${{ matrix.target }}" -c "${{ matrix.kind }}" -o "${release_name}"
@@ -55,7 +54,7 @@ jobs:
         if [ "${{ matrix.target }}" == "win-x64" ]; then
           7z a -tzip "${release_name}.zip" "./${release_name/*"
         else
-          tar czvf "${releas_name}.tar.gz" "${release_name}"
+          tar czvf "${release_name}.tar.gz" "${release_name}"
         fi
         
         # Delete output dir

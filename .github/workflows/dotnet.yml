@@ -44,7 +44,7 @@ jobs:
       shell: bash
       run: |
         # Define variables
-        commit_hash="$(git rev-parse --short '$GITHUB_SHA')"
+        commit_hash="$(git rev-parse --short "$GITHUB_SHA")"
         release_name="RiftRipper-nightly-${commit_hash}.${{ matrix.target }}"
         echo "$release_name"
         

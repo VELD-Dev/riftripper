@@ -31,7 +31,7 @@ jobs:
       run: dotnet build --configuration WINDOWS RiftRipper
       
     - name: Test
-      run: dotnet test --no-builds --verbosity normal
+      run: dotnet test --no-build --verbosity normal
       
     - name: Zip file
       uses: TheDoctor0/zip-release@0.7.1

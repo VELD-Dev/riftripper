@@ -55,7 +55,7 @@ jobs:
         if [ -d "$release_name" ]; then
           echo "dir exists"
         else
-          echo "dir does not exist
+          echo "dir does not exist"
         fi
         
         # Pack files

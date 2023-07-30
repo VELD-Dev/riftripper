@@ -11,7 +11,7 @@ on:
 
 jobs:
   build-windows:
-    name: Windows Unstable Builds
+    name: Windows Unstable Build
     runs-on: windows-latest
 
     steps:
@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
   build-ubuntu:
-    name: Ubuntu Unstable Builds
+    name: Ubuntu Unstable Build
     runs-on: ubuntu-latest
     
     steps:

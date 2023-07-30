@@ -38,7 +38,7 @@ jobs:
       with:
         filename: riftripper-nighlty.$(git rev-parse --short "$GITHUB_SHA").zip
         path: builds/
-        directory: RiftRipper/bin/WINDOWS/net7.0/
+        directory: RiftRipper/bin/WINDOWS/net7.0-windows/
       
     - name: Release
       uses: ncipollo/release-action@v1.12.0

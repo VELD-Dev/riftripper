@@ -51,7 +51,7 @@ jobs:
         ls -R ../../
         
         # Pack files
-        tar czvf "${release_name}.tar.gz" "$release_name"
+        tar -czvf "${release_name}.tar.gz" "$release_name"
         
         # Delete output dir
         rm -r "$release_name"

@@ -25,9 +25,6 @@ jobs:
           target: linux-x64
           
     runs-on: ${{ matrix.os }}
-    
-    permissions:
-      contents: read
 
     steps:
     - uses: actions/checkout@v3

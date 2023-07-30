@@ -36,7 +36,7 @@ jobs:
     - name: Zip file
       uses: TheDoctor0/zip-release@0.7.1
       with:
-        filename: riftripper-nighlty.$(git rev-parse --short "$GITHUB_SHA").zip
+        filename: riftripper-nighlty.${{ env.SHORT_SHA }}.zip
         path: builds/
         directory: RiftRipper/bin/WINDOWS/net7.0-windows/
       

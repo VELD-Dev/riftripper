@@ -51,6 +51,10 @@ jobs:
         # Build
         dotnet publish RiftRipper/RiftRipper.csproj --runtime "${{ matrix.target }}" -f=net7.0 -c "${{ matrix.kind }}" -o "${{ env.GITHUB_WORKSPACE }}/${release_name}"
         echo "published"
+        for entry in "${{ env.GITHUB_WORKSPACE }}"/*
+        do
+          echo "$entry"
+        done
         
         if [ -d "${{ env.GITHUB_WORKSPACE }}/${release_name}" ]; then
           echo "dir exists"

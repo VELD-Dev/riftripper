@@ -48,7 +48,7 @@ jobs:
         
         # Build
         dotnet publish RiftRipper/RiftRipper.csproj --runtime "${{ matrix.target }}" -f=net7.0 -c "${{ matrix.kind }}" #-o "$release_name"
-        ls -R
+        ls -R ../../
         
         # Pack files
         tar czvf "${release_name}.tar.gz" "$release_name"

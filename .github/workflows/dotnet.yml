@@ -52,6 +52,12 @@ jobs:
         dotnet publish RiftRipper/RiftRipper.csproj --runtime "${{ matrix.target }}" -c "${{ matrix.kind }}" -o "$release_name"
         echo "published"
         
+        if [ -d "$release_name" ]; then
+          echo "dir exists"
+        else
+          echo "dir does not exist
+        fi
+        
         # Pack files
         if [ "${{ matrix.target }}" == "win-x64" ]; then
           7z a -tzip "${release_name}.zip" "./${release_name}/*"

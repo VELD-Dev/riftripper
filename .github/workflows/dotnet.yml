@@ -46,6 +46,7 @@ jobs:
         # Define variables
         commit_hash=$(git rev-parse --short "$GITHUB_SHA")
         release_name="RiftRipper-nightly-${commit_hash}.${{ matrix.target }}"
+        echo "$release_name"
         
         # Build
         dotnet publish RiftRipper/RiftRipper.csproj --runtime "${{ matrix.target }}" -c "${{ matrix.kind }}" -o "${release_name}"
@@ -58,7 +59,7 @@ jobs:
         fi
         
         # Delete output dir
-        rem -r "${release_name}"
+        rem -r "$release_name"
       
     - name: Test
       run: dotnet test --no-build --verbosity normal

@@ -11,22 +11,21 @@ namespace RiftRipperLib;
 /// </summary>
 public class FilesUtils
 {
-    public const string TocFileExceptionID = "ERR_TOC_FILE_ABSENT";
-    public const string DagFileExceptionID = "ERR_DAG_FILE_ABSENT";
-    public static void ExtractFiles(string pathToDdir)
-    {
-        IList<string> errors = new List<string>();
-        var tocFilePath = Path.Combine(Path.GetFullPath(pathToDdir), "../", "toc");
-        var dagFilePath = Path.Combine(Path.GetFullPath(pathToDdir), "../", "dag");
+    public const string TocFileExceptionID = "ERR_TOC_NOT_FOUND";
+    public const string DagFileExceptionID = "ERR_DAG_NOT_FOUND";
 
-        if (!File.Exists(tocFilePath))
-            errors.Add($"{TocFileExceptionID}: No TOC file found in the game root directory.");
-        if
+    public static void ExtractFile(string relativePathToFile)
+    {
+
     }
 
-    public static void ExtractFile(string pathToFile,)
-
-    public static void RepackFiles(string pathToDdir)
+    /// <summary>
+    /// Repacks a file in a specific place in the game files.
+    /// </summary>
+    /// <param name="pathToFile">Path to the file to repack</param>
+    /// <param name="bundleName">Name of the bundle to repack the file into. If it does not exist, a new one will be created and repertoriated into the DAG and TOC files.</param>
+    /// <param name="relativePathToFile">Path inside the </param>
+    public static void RepackFile(string pathToFile, string bundleName, string relativePathToFile)
     {
         
     }

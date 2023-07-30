@@ -7,7 +7,7 @@ namespace RiftRipper.Frames;
 public class CreateProjectFrame : Frame
 {
     protected override string frameName { get; set; } = "Create a project";
-    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.Modal | ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoMove;
+    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoResize;
 
     public string projectId = "";
     public string projectName = "";

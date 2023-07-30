@@ -6,7 +6,7 @@ namespace RiftRipper.Frames;
 public class EditorSettingsFrame : Frame
 {
     protected override string frameName { get; set; } = "Editor settings";
-    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize;
+    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoResize;
     public EditorConfigs settings;
 
     public EditorSettingsFrame(Window wnd) : base(wnd)

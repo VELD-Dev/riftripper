@@ -10,7 +10,7 @@ namespace RiftRipper.Frames;
 public class ProjectSettingsFrame : Frame
 {
     protected override string frameName { get; set; } = "Project settings";
-    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize;
+    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoResize;
     public required Project loadedProject { get; set; }
 
     [SetsRequiredMembers]

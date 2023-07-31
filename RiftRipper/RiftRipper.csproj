@@ -8,7 +8,7 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <IsPublishable>False</IsPublishable>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <Configurations>Debug All;Release;WINDOWS;LINUX;Debug</Configurations>
+    <Configurations>Release;WINDOWS;LINUX;Debug</Configurations>
     <SignAssembly>True</SignAssembly>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <RepositoryType>git</RepositoryType>
@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://github.com/VELD-Dev/riftripper</PackageProjectUrl>
     <Description>Level editor for games made under the Luna Engine 4.0, itself made by Insomniac Games.</Description>
     <Copyright>See LICENSE</Copyright>
-    <AssemblyVersion>0.0.1.25</AssemblyVersion>
+    <AssemblyVersion>0.0.1.65</AssemblyVersion>
     <FileVersion>0.0.1</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -27,10 +27,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>$(DefineConstants)</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug All|AnyCPU'">
-    <DefineConstants>$(DefineConstants)</DefineConstants>
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WINDOWS|AnyCPU'">
@@ -39,10 +36,18 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <Optimize>True</Optimize>
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LINUX|AnyCPU'">
     <DefineConstants>$(DefineConstants);LINUX</DefineConstants>
+    <Optimize>True</Optimize>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -65,11 +70,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!--
     <None Update="Shaders\standard.vert.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Shaders\standardunlit.frag.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    -->
+    <None Update="Shaders\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

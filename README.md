@@ -1,20 +1,27 @@
 # RiftRipper
-Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Clank Rift Apart, Spiderman (PS5/PC) and potentially Ratchet and Clank 2016.
+![GitHub release (with filter)](https://img.shields.io/github/v/release/VELD-Dev/riftripper?label=stable)
+![GitHub all releases](https://img.shields.io/github/downloads/VELD-Dev/riftripper/total)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/VELD-Dev/riftripper/dotnet.yml?label=nightly-builds)  
 
-## Compatibility list for the `v0.1.0`
+Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Clank Rift Apart, Spiderman (PS5/PC) and potentially Ratchet and Clank 2016.  
+
+RiftRipper is made to be compatible with the edits you will or would make with **Ripped Apart** by **chaoticgd**: [**chaoticgd/ripped_apart**](https://github.com/chaoticgd/ripped_apart)
+
+## Compatibility list for the `v1.0.0`
 - ✅ Ratchet & Clank: Rift Apart (PC)
 - ❔ Ratchet & Clank: Rift Apart (PS5)
 - ❔ Ratchet & Clank (2016)
 - ❌ Marvel's Spider-Man (2018)
 - ❔ Marvel's Spider-Man: Miles Morales
 - ❔ Marvel's Spider-Man 2 (2023)
-- ❔ Marvel's Wolverine*  
+- ❔ Marvel's Wolverine<sup>1</sup>  
   
 ✅: Compatibility will be ensured.  
 ❔: Compatibility will be defined depending on the game engine version, if it is close enough to RiftRipper extracting and editing library.  
 ❌: Compatibility will not be ensured or will not be checked, or the compatibility will be impossible because of the engine version.  
+> <sup>1</sup><sub>Wolverine should be supported on its launch, but the compatibility status may change on release and become incompatible.</sub>
 
-## Key Features for the `v0.1.0`
+## Key Features for the `v1.0.0`
 - ✅ Open and view a level.
 - ✅ Extract the model as an OBJ or FBX model.
 - ✅ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
@@ -46,3 +53,36 @@ Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Cl
 - Add custom simple objects, such as destructible objects, world assets (with collision).
 - Allow team work on levels, using a project system that only saves the ID of edited object, and all their metadatas. *(absolute rotation, absolute position, absolute scale, type, model TUID and instance parameters)*
 - For users who don't want to edit levels, bundle several edits in one file, as long as they do not edit the same map.
+
+---
+
+# About Nightly Builds
+Nightly builds are highly unstable builds that are updated on every single change made to the editor.  
+Soon, an auto-updating system will be incorporated to RiftRipper and you will be able to choose your update channel: **nightly** or **release**.  
+The nightly channel is recommended only for developers, because it has debug and symbol files, and it may slow your experience using it.  
+**If you want to use stable versions of the level editor, please only take releases!**
+
+## TODO list *(features working in Nightly builds)*
+All the features here are listed in the order they will be done.
+- `[30-05-2023]` Project creation.
+- [x] `[08-06-2023]` Project creation and loading.
+- [x] `[12-06-2023]` Editor settings saving.
+- *Little pause, waiting for the game to release on PC and some reverse engineering to be done.*
+- [ ] 🚧 Read `DAT1` files without extracting those.
+- [ ] Archives explorer without extraction.
+- [ ] Level viewing.
+  - [ ] *Probably a huge optimization part.*
+- [ ] Level extracting to wavefront (`.obj`) files.
+- [ ] Level editing.
+- [ ] Duplicating objects.
+- [ ] Saving levels to original files.
+- [ ] Make an actor explorer dockable page with a viewer and an exporter.
+- [ ] Adding objects from the actors explorer.
+- [ ] Saving level(s) editions to project file.
+- [ ] Saving levels to new files + editing the `toc` and `dag` files to avoid overwriting original files.
+- [ ] Actors instance variables/fields editing.
+- [ ] Add new displacement portals on the map *(tagets of the rift glove)*.
+- [ ] Create custom pocket-rift portals *(and link it with a target)*.
+- [ ] *(Create locomotion portals, with the input and output portals.)*
+- [ ] Create portals to move to different levels. *(It should probably be possible)*
+- [ ] We'll see in the future when I'll get there.

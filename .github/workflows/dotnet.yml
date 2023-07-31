@@ -6,8 +6,12 @@ name: Nightly Releases
 on:
   push:
     branches: [ "main" ]
+    paths:
+    - "**.cs"
   pull_request:
     branches: [ "main" ]
+    paths:
+    - "**.cs"
 
 jobs:
   build:

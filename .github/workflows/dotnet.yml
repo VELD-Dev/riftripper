@@ -49,11 +49,11 @@ jobs:
         echo "$release_name"
         
         # Build
-        dotnet build RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -r "${{ matrix.target }}"
+        dotnet build RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -r "${{ matrix.target }}" --self-contained
         wait
         
         # Publish
-        # dotnet publish RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -r "${{ matrix.target }}" -o "$release_name"
+        # dotnet publish RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -r "${{ matrix.target }}" -o "$release_name" --self-contained
         wait
         
         ls -R ../../

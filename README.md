@@ -12,11 +12,12 @@ Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Cl
 - ❌ Marvel's Spider-Man (2018)
 - ❔ Marvel's Spider-Man: Miles Morales
 - ❔ Marvel's Spider-Man 2 (2023)
-- ❔ Marvel's Wolverine*  
+- ❔ Marvel's Wolverine<sup>1</sup>  
   
 ✅: Compatibility will be ensured.  
 ❔: Compatibility will be defined depending on the game engine version, if it is close enough to RiftRipper extracting and editing library.  
 ❌: Compatibility will not be ensured or will not be checked, or the compatibility will be impossible because of the engine version.  
+> <sup>1</sup><sub>Wolverine should be supported on its launch, but the compatibility status may change on release and become incompatible.</sub>
 
 ## Key Features for the `v1.0.0`
 - ✅ Open and view a level.

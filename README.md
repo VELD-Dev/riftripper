@@ -64,7 +64,7 @@ All the features here are listed in the order they will be done.
 - [x] `[30-05-2023]` Creating the project.
 - [x] `[08-06-2023]` Project creation and loading.
 - [x] `[12-06-2023]` Editor settings saving.
-- [x] `[26-07-2023]` *Little pause, waiting for the game to release on PC and some reverse engineering to be done.*
+- *Little pause, waiting for the game to release on PC and some reverse engineering to be done.*
 - [ ] 🚧 Read `DAT1` files without extracting those.
 - [ ] Archives explorer without extraction.
 - [ ] Level viewing.

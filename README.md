@@ -61,7 +61,7 @@ The nightly channel is recommended only for developers, because it has debug and
 
 ## TODO list *(features working in Nightly builds)*
 All the features here are listed in the order they will be done.
-- [x] `[30-05-2023]` Creating the project.
+- `[30-05-2023]` Project creation.
 - [x] `[08-06-2023]` Project creation and loading.
 - [x] `[12-06-2023]` Editor settings saving.
 - *Little pause, waiting for the game to release on PC and some reverse engineering to be done.*

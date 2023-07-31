@@ -53,13 +53,13 @@ Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Cl
 
 ---
 
-## About Nightly Builds
+# About Nightly Builds
 Nightly builds are highly unstable builds that are updated on every single change made to the editor.  
 Soon, an auto-updating system will be incorporated to RiftRipper and you will be able to choose your update channel: **nightly** or **release**.  
 The nightly channel is recommended only for developers, because it has debug and symbol files, and it may slow your experience using it.  
 **If you want to use stable versions of the level editor, please only take releases!**
 
-### TODO list *(features working in Nightly builds)*
+## TODO list *(features working in Nightly builds)*
 All the features here are listed in the order they will be done.
 - [x] `[30-05-2023]` Creating the project.
 - [x] `[08-06-2023]` Project creation and loading.

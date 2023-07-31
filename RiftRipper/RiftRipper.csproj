@@ -23,10 +23,6 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
-    <DefineConstants>WIN</DefineConstants>
   </PropertyGroup>
 
 
@@ -40,6 +36,10 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='WINDOWS|AnyCPU'">
     <DefineConstants>$(DefineConstants);WIN</DefineConstants>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <DefineConstants>WIN</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='LINUX|AnyCPU'">

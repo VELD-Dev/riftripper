@@ -3,7 +3,9 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/VELD-Dev/riftripper/total)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/VELD-Dev/riftripper/dotnet.yml?label=nightly-builds)  
 
-Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Clank Rift Apart, Spiderman (PS5/PC) and potentially Ratchet and Clank 2016.
+Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Clank Rift Apart, Spiderman (PS5/PC) and potentially Ratchet and Clank 2016.  
+
+RiftRipper is made to be compatible with the edits you will or would make with **Ripped Apart** by **chaoticgd**: [**chaoticgd/ripped_apart**](https://github.com/chaoticgd/ripped_apart)
 
 ## Compatibility list for the `v1.0.0`
 - ✅ Ratchet & Clank: Rift Apart (PC)

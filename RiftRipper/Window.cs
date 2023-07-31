@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using RiftRipper.Drawing;
 using FileDialog = RiftRipper.Utility.FileDialog;
 
 namespace RiftRipper;
@@ -9,6 +10,8 @@ public class Window : GameWindow
     private ImGuiController controller;
     private List<Frame> openFrames;
     public Project openedProject;
+    public Games openedGame = Games.Undefined;
+    public string openedGamePath = string.Empty;
     public EditorConfigs Settings = EditorConfigs.TryLoadOrCreateSettings(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Settings.json"));
     internal bool showFramerate = false;
     internal float Framerate;
@@ -158,158 +161,56 @@ public class Window : GameWindow
         controller?.MouseScroll(e.Offset);
     }
 
-    private void RenderMenuBar()
-    {
-        if (ImGui.BeginMainMenuBar())
-        {
-            if (ImGui.BeginMenu("File"))
-            {
-                if (ImGui.MenuItem("Open level (will be removed)", "CTRL+L", false, false))
-                {
-                    var res = FileDialog.OpenFile();
-                    if (res.Length > 0)
-                    {
-                        Console.WriteLine($"File found: {res[0]}");
-                    }
-                }
-
-                if (ImGui.MenuItem("Open a game", "CTRL+G"))
-                {
-                    var res = FileDialog.OpenFile("Select game executable", ".exe");
-                    if (res.Length > 0)
-                    {
-                        Console.WriteLine($"Folder found: {Path.GetDirectoryName(res)}, must check if it's a game.");
-                        switch(Path.GetFileName(res))
-                        {
-                            case "RiftApart.exe":  // Must match perfectly.
-                                Console.WriteLine($"Game is Ratchet & Clank: Rift Apart.");
-                            break;
-                        }
-                    }
-                }
-
-                ImGui.Separator();
-
-                if (ImGui.MenuItem("Create a Rift project", "CTRL+P"))
-                {
-                    AddFrame(new CreateProjectFrame(this));
-                    Console.WriteLine("Should open project creation menu");
-                }
-
-                if (ImGui.MenuItem("Open a Rift project (.rift)", "CTRL+ALT+P"))
-                {
-                    var res = FileDialog.OpenFile("Open project", ".rift");
-                    if (res.Length > 0)
-                    {
-                        try
-                        {
-                            this.openedProject = Project.OpenFromFile(res);
-                        }
-                        catch(Exception ex)
-                        {
-                            Console.WriteLine(ex);
-                        }
-                    }
-                }
-
-                if(openedProject != null)
-                {
-                    if(ImGui.MenuItem("Close the active project", "SHIFT+ALT+P"))
-                        openedProject = null;
-                }
-
-                ImGui.Separator();
-
-                if(ImGui.MenuItem("Quit", "ALT+F4"))
-                {
-                    Environment.Exit(0);
-                }
-
-                ImGui.EndMenu();
-            }
-
-            if (ImGui.BeginMenu("Edit"))
-            {
-                if (ImGui.MenuItem("Editor settings", "CTRL+SHIFT+E"))
-                {
-                    AddFrame(new EditorSettingsFrame(this));
-                    Console.WriteLine("Should open editor settings");
-                }
-
-                if (ImGui.MenuItem("Project settings", "CTRL+SHIFT+P", false, openedProject != null))
-                {
-                    AddFrame(new ProjectSettingsFrame(this, openedProject));
-                    Console.WriteLine("Should open project settings");
-                }
-
-                ImGui.Separator();
-
-                if (ImGui.BeginMenu("Tools"))
-                {
-                    if (ImGui.MenuItem("Create a local portal (R&C:RA only)", "P", false, false))
-                    {
-                        Console.WriteLine("Opening portal creation modal !");
-                    }
-
-                    if(ImGui.MenuItem("Create a displacement portal (R&C:RA only)", "SHIFT+P", false, false))
-                    {
-                        Console.WriteLine("Opening displacement portal creation modal !");
-                    }
-
-                    if (ImGui.MenuItem("Create a level portal (R&C:RA only)", "L", false, false))
-                    {
-                        Console.WriteLine("Opening levels portal creation modal !");
-                    }
-
-                    if (ImGui.MenuItem("Create a pocket rift portal (R&C:RA only)", "SHIFT+L", false, false))
-                    {
-                        Console.WriteLine("Opening pocket rift portal creation modal !");
-                    }
-
-                    ImGui.EndMenu();
-                }
-
-                ImGui.EndMenu();
-            }
-
-            if (ImGui.BeginMenu("View"))
-            {
-                if (ImGui.MenuItem("Show framerate", "", showFramerate, true))
-                    showFramerate = !showFramerate;
-
-                ImGui.EndMenu();
-            }
-
-            if (ImGui.BeginMenu("About"))
-            {
-                if (ImGui.MenuItem("Official GitHub repository"))
-                {
-                    Process.Start(new ProcessStartInfo("https://github.com/VELD-Dev/riftripper") { UseShellExecute = true });
-                }
-                ImGui.EndMenu();
-            }
-
-            if (Settings.DebugMode)
-            {
-                if (ImGui.BeginMenu("Debug"))
-                {
-                    if (ImGui.MenuItem("Demo frame"))
-                    {
-                        AddFrame(new DemoWindowFrame(this));
-                    }
-                    ImGui.EndMenu();
-                }
-            }
-
-            ImGui.EndMainMenuBar();
-        }
-    }
-
     private void RenderUI(float deltaTime)
     {
         RenderMenuBar();
 
         foreach (Frame frame in openFrames)
             frame.RenderAsWindow(deltaTime);
+    }
+
+    private void RenderMenuBar()
+    {
+        if (ImGui.BeginMainMenuBar())
+        {
+            if (ImGui.BeginMenu("File"))
+            {
+                FileMenuDraw.OpenGameMenuItem(this);
+                ImGui.Separator();
+                FileMenuDraw.CreateRiftProjectMenuItem(this);
+                FileMenuDraw.OpenRiftProjectMenuItem(this);
+                FileMenuDraw.CloseActiveProjectMenuItem(this);
+                ImGui.Separator();
+                FileMenuDraw.CloseRiftripperMenuItem(this);
+                ImGui.EndMenu();
+            }
+            if (ImGui.BeginMenu("Edit"))
+            {
+                EditMenuDraw.EditorSettingsMenuItem(this);
+                EditMenuDraw.ProjectSettingsMenuItem(this);
+                ImGui.Separator();
+                if (ImGui.BeginMenu("Tools"))
+                {
+                    EditMenuDraw.ToolsMenuDraw.CreateLocalPortalMenuItem(this);
+                    EditMenuDraw.ToolsMenuDraw.CreateDisplacementPortalMenuItem(this);
+                    EditMenuDraw.ToolsMenuDraw.CreateLevelPortalMenuItem(this);
+                    EditMenuDraw.ToolsMenuDraw.CreatePocketRiftPortalMenuItem(this);
+                    ImGui.EndMenu();
+                }
+                ImGui.EndMenu();
+            }
+            if (ImGui.BeginMenu("View"))
+            {
+                ViewMenuDraw.ShowFramerateMenuItem(this);
+                ImGui.EndMenu();
+            }
+            if (ImGui.BeginMenu("About"))
+            {
+                AboutMenuDraw.OfficialGithubRepoMenuItem(this);
+                ImGui.EndMenu();
+            }
+            DebugMenuDraw.Menu(this);
+            ImGui.EndMainMenuBar();
+        }
     }
 }

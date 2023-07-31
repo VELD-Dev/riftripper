@@ -20,9 +20,11 @@ jobs:
         - kind: WINDOWS
           os: ubuntu-latest
           target: win-x64
+          fw: net7.0-windows
         - kind: LINUX
           os: ubuntu-latest
           target: linux-x64
+          fw: net7.0
           
     runs-on: ${{ matrix.os }}
 
@@ -47,11 +49,11 @@ jobs:
         echo "$release_name"
         
         # Build
-        dotnet build RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -f "net7.0" -r "${{ matrix.target }}" -o "$release_name"
+        dotnet build RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -f "${{ matrix.fw }}" -r "${{ matrix.target }}" -o "$release_name"
         wait
         
         # Publish
-        dotnet publish RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -f "net7.0"  -r "${{ matrix.target }}" -o "$release_name"
+        dotnet publish RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -f "${{ matrix.fw }}"  -r "${{ matrix.target }}" -o "$release_name"
         wait
         
         ls -R ../../

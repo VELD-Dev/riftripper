@@ -21,10 +21,12 @@ jobs:
           os: ubuntu-latest
           target: win-x64
           fw: net7.0-windows
+          netos: Windows_NT
         - kind: LINUX
           os: ubuntu-latest
           target: linux-x64
           fw: net7.0
+          netos: linux
           
     runs-on: ${{ matrix.os }}
 

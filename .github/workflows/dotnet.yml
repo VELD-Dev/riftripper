@@ -20,11 +20,11 @@ jobs:
         - kind: WINDOWS
           os: windows-latest
           target: win-x64
-          netos: Windows_NT
+          fw: net7.0-windows
         - kind: LINUX
           os: ubuntu-latest
           target: linux-x64
-          netos: linux
+          fw: net7.0
           
     runs-on: ${{ matrix.os }}
 
@@ -60,12 +60,16 @@ jobs:
         wait
         
         # Pack files
-        tar -czvf "${release_name}.tar.gz" "$release_name"
+        if [ "${{ matrix.target }}" == "win-x64" ]; then
+          zip -r "${release_name}.zip" "RiftRipper/bin/${{ matrix.kind }}/${{ matrix.fw }}"
+        else
+          tar -czvf "${release_name}.tar.gz" "RiftRipper/bin/${{ matrix.kind }}/${{ matrix.fw }}"
+        fi
         wait
         
         # Delete output dir
-        rm -r "$release_name"
-        wait
+        #rm -r "$release_name"
+        #wait
       
     - name: Test
       run: dotnet test --no-build --verbosity normal

@@ -5,7 +5,7 @@
 
 Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Clank Rift Apart, Spiderman (PS5/PC) and potentially Ratchet and Clank 2016.
 
-## Compatibility list for the `v0.1.0`
+## Compatibility list for the `v1.0.0`
 - ✅ Ratchet & Clank: Rift Apart (PC)
 - ❔ Ratchet & Clank: Rift Apart (PS5)
 - ❔ Ratchet & Clank (2016)
@@ -18,7 +18,7 @@ Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Cl
 ❔: Compatibility will be defined depending on the game engine version, if it is close enough to RiftRipper extracting and editing library.  
 ❌: Compatibility will not be ensured or will not be checked, or the compatibility will be impossible because of the engine version.  
 
-## Key Features for the `v0.1.0`
+## Key Features for the `v1.0.0`
 - ✅ Open and view a level.
 - ✅ Extract the model as an OBJ or FBX model.
 - ✅ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
@@ -69,13 +69,17 @@ All the features here are listed in the order they will be done.
 - [ ] Archives explorer without extraction.
 - [ ] Level viewing.
 - [ ] *Probably a huge optimization part.*
-- [ ] Level extracting to wavefront (`.obj`) files.
+- [ ] Level extracting to wavefront (`.obj`) files. - **Pre-Release v0.1.0**
 - [ ] Level editing.
 - [ ] Duplicating objects.
-- [ ] Saving levels to original files.
-- [ ] Make an actor explorer dockable page with a viewer and an exporter.
-- [ ] Adding objects from the actors explorer.
-- [ ] Saving level(s) editions to project file.
-- [ ] Saving levels to new files + editing the `toc` and `dag` files to avoid overwriting original files.
-- [ ] Actors instance variables/fields editing.
-- [ ] Create
+- [ ] Saving levels to original files. - **Release v1.0.0**
+- [ ] Make an actor explorer dockable page with a viewer and an exporter. - **Pre-Release v1.0.1**
+- [ ] Adding objects from the actors explorer. - **Release v1.1.0**
+- [ ] Saving level(s) editions to project file. - **Release v1.2.0**
+- [ ] Saving levels to new files + editing the `toc` and `dag` files to avoid overwriting original files. - **Release v1.3.0**
+- [ ] Actors instance variables/fields editing. - **Release v1.4.0**
+- [ ] Add new displacement portals on the map *(tagets of the rift glove)*.
+- [ ] Create custom pocket-rift portals *(and link it with a target)*. - **Release v1.5.0**
+- [ ] *(Create locomotion portals, with the input and output portals.)*
+- [ ] Create portals to move to different levels. *(It should probably be possible)* - **Release v1.6.0**
+- [ ] We'll see in the future when I'll get there.

@@ -15,7 +15,7 @@ jobs:
     
     strategy:
       matrix:
-        kind: ["WINDOWS", "LINUX"]
+        kind: ["WINDOWS"]#, "LINUX"]
         include:
         - kind: WINDOWS
           os: ubuntu-latest

@@ -82,7 +82,7 @@ jobs:
       with:
         name: Nightly Builds
         tag: 'nightly'
-        artifacts: RiftRipper-nightly-*.zip
+        artifacts: ./RiftRipper-nightly-*
         allowUpdates: true
         draft: false
         omitBodyDuringUpdate: true

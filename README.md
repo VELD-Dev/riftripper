@@ -69,18 +69,18 @@ All the features here are listed in the order they will be done.
 - [ ] 🚧 Read `DAT1` files without extracting those.
 - [ ] Archives explorer without extraction.
 - [ ] Level viewing.
-- [ ] *Probably a huge optimization part.*
-- [ ] Level extracting to wavefront (`.obj`) files. - **Pre-Release v0.1.0**
+  - [ ] *Probably a huge optimization part.*
+- [ ] Level extracting to wavefront (`.obj`) files.
 - [ ] Level editing.
 - [ ] Duplicating objects.
-- [ ] Saving levels to original files. - **Release v1.0.0**
-- [ ] Make an actor explorer dockable page with a viewer and an exporter. - **Pre-Release v1.0.1**
-- [ ] Adding objects from the actors explorer. - **Release v1.1.0**
-- [ ] Saving level(s) editions to project file. - **Release v1.2.0**
-- [ ] Saving levels to new files + editing the `toc` and `dag` files to avoid overwriting original files. - **Release v1.3.0**
-- [ ] Actors instance variables/fields editing. - **Release v1.4.0**
+- [ ] Saving levels to original files.
+- [ ] Make an actor explorer dockable page with a viewer and an exporter.
+- [ ] Adding objects from the actors explorer.
+- [ ] Saving level(s) editions to project file.
+- [ ] Saving levels to new files + editing the `toc` and `dag` files to avoid overwriting original files.
+- [ ] Actors instance variables/fields editing.
 - [ ] Add new displacement portals on the map *(tagets of the rift glove)*.
-- [ ] Create custom pocket-rift portals *(and link it with a target)*. - **Release v1.5.0**
+- [ ] Create custom pocket-rift portals *(and link it with a target)*.
 - [ ] *(Create locomotion portals, with the input and output portals.)*
-- [ ] Create portals to move to different levels. *(It should probably be possible)* - **Release v1.6.0**
+- [ ] Create portals to move to different levels. *(It should probably be possible)*
 - [ ] We'll see in the future when I'll get there.

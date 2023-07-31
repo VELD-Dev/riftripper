@@ -50,3 +50,32 @@ Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Cl
 - Add custom simple objects, such as destructible objects, world assets (with collision).
 - Allow team work on levels, using a project system that only saves the ID of edited object, and all their metadatas. *(absolute rotation, absolute position, absolute scale, type, model TUID and instance parameters)*
 - For users who don't want to edit levels, bundle several edits in one file, as long as they do not edit the same map.
+
+---
+
+## About Nightly Builds
+Nightly builds are highly unstable builds that are updated on every single change made to the editor.  
+Soon, an auto-updating system will be incorporated to RiftRipper and you will be able to choose your update channel: **nightly** or **release**.  
+The nightly channel is recommended only for developers, because it has debug and symbol files, and it may slow your experience using it.  
+**If you want to use stable versions of the level editor, please only take releases!**
+
+### TODO list *(features working in Nightly builds)*
+All the features here are listed in the order they will be done.
+- [x] `[30-05-2023]` Creating the project.
+- [x] `[08-06-2023]` Project creation and loading.
+- [x] `[12-06-2023]` Editor settings saving.
+- [x] `[26-07-2023]` *Little pause, waiting for the game to release on PC and some reverse engineering to be done.*
+- [ ] 🚧 Read `DAT1` files without extracting those.
+- [ ] Archives explorer without extraction.
+- [ ] Level viewing.
+- [ ] *Probably a huge optimization part.*
+- [ ] Level extracting to wavefront (`.obj`) files.
+- [ ] Level editing.
+- [ ] Duplicating objects.
+- [ ] Saving levels to original files.
+- [ ] Make an actor explorer dockable page with a viewer and an exporter.
+- [ ] Adding objects from the actors explorer.
+- [ ] Saving level(s) editions to project file.
+- [ ] Saving levels to new files + editing the `toc` and `dag` files to avoid overwriting original files.
+- [ ] Actors instance variables/fields editing.
+- [ ] Create

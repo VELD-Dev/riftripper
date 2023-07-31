@@ -47,7 +47,11 @@ jobs:
         echo "$release_name"
         
         # Build
-        dotnet publish RiftRipper/RiftRipper.csproj --runtime "${{ matrix.target }}" -f=net7.0 -c "${{ matrix.kind }}" #-o "$release_name"
+        dotnet build RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -f "net7.0" -r "${{ matrix.target }}" -o "$release_name"
+        wait
+        
+        # Publish
+        dotnet publish RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -f "net7.0"  -r "${{ matrix.target }}" -o "$release_name"
         wait
         
         ls -R ../../

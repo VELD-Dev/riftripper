@@ -52,22 +52,12 @@ jobs:
         dotnet build RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -r "${{ matrix.target }}" --no-self-contained
         wait
         
-        # Publish
-        # dotnet publish RiftRipper/RiftRipper.csproj -c "${{ matrix.kind }}" -r "${{ matrix.target }}" -o "$release_name" --no-self-contained
-        wait
-        
-        ls -R
-        wait
-        
         # Pack files
         if [ "${{ matrix.target }}" == "win-x64" ]; then
-          zip -r "${release_name}.zip" "RiftRipper/bin/${{ matrix.kind }}/${{ matrix.fw }}"
+          7z a -tzip "${release_name}.zip" "RiftRipper/bin/${{ matrix.kind }}/${{ matrix.fw }}/${{ matrix.target }}/*"
         else
-          tar -czvf "${release_name}.tar.gz" "RiftRipper/bin/${{ matrix.kind }}/${{ matrix.fw }}"
+          tar -czvf "${release_name}.tar.gz" "RiftRipper/bin/${{ matrix.kind }}/${{ matrix.fw }}/${{ matrix.target }}"
         fi
-        wait
-        
-        ls -R
         wait
         
         # Delete output dir

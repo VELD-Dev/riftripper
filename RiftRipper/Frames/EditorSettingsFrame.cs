@@ -27,7 +27,7 @@ public class EditorSettingsFrame : Frame
         ImGui.SeparatorText("Advanced");
 
         ImGui.BeginGroup();
-#if WINDOWS
+#if WIN
         if(ExtensionManager.IsAssociated(".rift", Program.AppName))
         {
             if (ImGui.Button("Dissociate .rift files from app"))

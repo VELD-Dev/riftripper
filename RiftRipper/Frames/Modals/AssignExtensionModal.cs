@@ -1,4 +1,5 @@
-﻿using Vector2 = System.Numerics.Vector2;
+﻿#if WIN
+using Vector2 = System.Numerics.Vector2;
 
 namespace RiftRipper.Frames.Modals;
 
@@ -40,3 +41,4 @@ public class AssignExtensionModal : Modal
         base.RenderAsWindow(deltaTime);
     }
 }
+#endif

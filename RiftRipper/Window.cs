@@ -1,4 +1,5 @@
-﻿using FileDialog = RiftRipper.Utility.FileDialog;
+﻿using System.Reflection;
+using FileDialog = RiftRipper.Utility.FileDialog;
 
 namespace RiftRipper;
 
@@ -8,7 +9,7 @@ public class Window : GameWindow
     private ImGuiController controller;
     private List<Frame> openFrames;
     public Project openedProject;
-    public EditorConfigs Settings = EditorConfigs.TryLoadOrCreateSettings(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Settings.json"));
+    public EditorConfigs Settings = EditorConfigs.TryLoadOrCreateSettings(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Settings.json"));
     internal bool showFramerate = false;
     internal float Framerate;
 
@@ -86,7 +87,7 @@ public class Window : GameWindow
             }
         }
 
-        FontsManager.LoadDefaultFont("KanitRegular", Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Assets", "Fonts", "Kanit", "Kanit-Regular.ttf"));
+        FontsManager.LoadDefaultFont("KanitRegular", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Assets", "Fonts", "Kanit", "Kanit-Regular.ttf"));
 
         // Setting ImGui default settings
         ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0f);
@@ -163,7 +164,7 @@ public class Window : GameWindow
         {
             if (ImGui.BeginMenu("File"))
             {
-                if (ImGui.MenuItem("Open level", "CTRL+L"))
+                if (ImGui.MenuItem("Open level (will be removed)", "CTRL+L", false, false))
                 {
                     var res = FileDialog.OpenFile();
                     if (res.Length > 0)
@@ -174,10 +175,16 @@ public class Window : GameWindow
 
                 if (ImGui.MenuItem("Open a game", "CTRL+G"))
                 {
-                    var res = FileDialog.OpenFolder();
+                    var res = FileDialog.OpenFile("Select game executable", ".exe");
                     if (res.Length > 0)
                     {
-                        Console.WriteLine($"Folder found: {res[0]}, must check if it's a game");
+                        Console.WriteLine($"Folder found: {Path.GetDirectoryName(res)}, must check if it's a game.");
+                        switch(Path.GetFileName(res))
+                        {
+                            case "RiftApart.exe":  // Must match perfectly.
+                                Console.WriteLine($"Game is Ratchet & Clank: Rift Apart.");
+                            break;
+                        }
                     }
                 }
 

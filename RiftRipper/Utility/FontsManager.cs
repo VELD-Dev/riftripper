@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,8 +9,8 @@ namespace RiftRipper.Utility;
 
 unsafe public static class FontsManager
 {
-    public static readonly ImFontPtr KanitMedium = ImGui.GetIO().Fonts.AddFontFromFileTTF(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Assets", "Fonts", "Kanit", "Kanit-Medium.ttf"), 15);
-    public static readonly ImFontPtr KanitBold = ImGui.GetIO().Fonts.AddFontFromFileTTF(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "Assets", "Fonts", "Kanit", "Kanit-Bold.ttf"), 15);
+    public static readonly ImFontPtr KanitMedium = ImGui.GetIO().Fonts.AddFontFromFileTTF(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Assets", "Fonts", "Kanit", "Kanit-Medium.ttf"), 15);
+    public static readonly ImFontPtr KanitBold = ImGui.GetIO().Fonts.AddFontFromFileTTF(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Assets", "Fonts", "Kanit", "Kanit-Bold.ttf"), 15);
     public static Dictionary<string, ImFontPtr> Fonts { get; private set; } = new()
     {
         { "KanitMedium", KanitMedium },

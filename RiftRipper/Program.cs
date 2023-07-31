@@ -10,14 +10,14 @@ internal class Program
     public static string ProvidedPath;
     public static string ProjectOpenPath;
 
-#if WINDOWS
+#if WIN
     public static bool isExtAssociated = ExtensionManager.IsAssociated(".rift", AppName);
 #endif
 
     [STAThread]
     static void Main(string[] args)
     {
-#if WINDOWS
+#if WIN
         Console.WriteLine($"Is extension associated ? {isExtAssociated} - {ExtensionManager.IsAssociated(".rift", AppName)}");
 #endif
         Window window = new(args);

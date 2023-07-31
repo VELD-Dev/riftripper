@@ -36,16 +36,8 @@ jobs:
         
     - name: Restore dependencies
       run: dotnet restore
-      
-    - name: Build
-      uses: EasyDesk/action-dotnet-publish@v1.0.0
-      with:
-        path: "RiftRipper/RiftRipper.csproj"
-        output-dir: "builds/${{ matrix.target }}"
-        build-configuration: ${{ matrix.kind }}
-        skip-build: false
 
-    - name: Packaging
+    - name: Build
       shell: bash
       run: |
         # Define variables
@@ -54,34 +46,20 @@ jobs:
         release_name="RiftRipper-nightly-${build_date}.${commit_hash}.${{ matrix.target }}"
         echo "$release_name"
         
-        if [ "${{ matrix.target }}" == "win-x64" ]; then
-          zip -r "${release_name}.zip" "builds/${{ matrix.target }}"
-        else
-          tar -czvf "${release_name}.tar.gz" "builds/${{ matrix.taget }}"
-        fi
+        # Build
+        dotnet publish RiftRipper.sln --runtime "${{ matrix.target }}" -f=net7.0 -c "${{ matrix.kind }}" #-o "$release_name"
         wait
         
-        rm -r "builds/${{ matrix.target }}"
+        ls -R ../../
         wait
-
-#    - name: Build
-#      shell: bash
-#      run: |
-#        # Define variables
-#        commit_hash=$(git rev-parse --short "$GITHUB_SHA")
-#        build_date=$(date +'%Y-%m-%d')
-#        release_name="RiftRipper-nightly-${build_date}.${commit_hash}.${{ matrix.target }}"
-#        echo "$release_name"
-#        
-#        # Build
-#        dotnet publish RiftRipper.sln --runtime "${{ matrix.target }}" -f=net7.0 -c "${{ matrix.kind }}" #-o "$release_name"
-#        ls -R ../../
-#        
-#        # Pack files
-#        tar -czvf "${release_name}.tar.gz" "$release_name"
-#        
-#        # Delete output dir
-#        rm -r "$release_name"
+        
+        # Pack files
+        tar -czvf "${release_name}.tar.gz" "$release_name"
+        wait
+        
+        # Delete output dir
+        rm -r "$release_name"
+        wait
       
     - name: Test
       run: dotnet test --no-build --verbosity normal

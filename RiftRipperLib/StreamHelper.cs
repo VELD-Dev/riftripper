@@ -195,35 +195,46 @@ public class StreamHelper : BinaryReader
     /// <summary>
     /// Reads a string of size <c>size</c> or reads until there's no string to read anymore (until it sees a <c>0x00</c> byte)
     /// </summary>
+    /// <param name="end_offset">This returns the end offset of the string, if it's ever needed to reach the next string without knowing the offset of the next string.</param>
     /// <param name="size">Size of the string. Leave it at -1 if you want to read a string until it sees a byte <c>0x00</c>.</param>
     /// <param name="offset">Offset where it should read the string.</param>
     /// <param name="relative">Wether this offset should be relative or absolute.</param>
     /// <returns>The string decoded as ANSI.</returns>
-    public string ReadString(long offset = 0x0, bool relative = true, int size = -1)
+    public string ReadString(out long end_offset, long offset = 0x0, bool relative = true, int size = -1)
     {
         var sb = new StringBuilder();
 
-        if(size > 0)
-            for(int i = 0; i < size; i++)
+        int relative_pos = 0;
+        if (size > 0)
+        {
+            for (int i = 0; i < size; i++)
             {
                 var nextByte = Peek(
                     offset: offset + i,
                     relative: relative
                     )[0];
-                if (nextByte == 0x0) break;
+                if (nextByte == 0x0)
+                    break;
                 sb.Append(nextByte);
+                relative_pos++;
             }
+        }
         else
-            for(int i = 0; Peek(0x1, offset + i, relative)[0] != 0x0; i++)
+        {
+            for (int i = 0; Peek(0x1, offset + i, relative)[0] != 0x0; i++)
             {
                 var nextByte = Peek(
                     offset: offset + i,
                     relative: relative
                     )[0];
-                if (nextByte == 0x00) break;
+                if (nextByte == 0x00)
+                    break;
                 sb.Append(nextByte);
+                relative_pos++;
             }
+        }
 
+        end_offset = Position + relative_pos;
         return sb.ToString();
     }
 

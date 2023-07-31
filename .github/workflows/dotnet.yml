@@ -1,7 +1,7 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: .NET
+name: Nightly Releases
 
 on:
   push:
@@ -10,35 +10,93 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build-windows:
-    name: Windows Unstable Builds
-    runs-on: windows-latest
+  build:
+    name: Nightly Builds
+    
+    strategy:
+      matrix:
+        kind: ["WINDOWS", "LINUX"]
+        include:
+        - kind: WINDOWS
+          os: ubuntu-latest
+          target: win-x64
+        - kind: LINUX
+          os: ubuntu-latest
+          target: linux-x64
+          
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 7.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-  build-ubuntu:
-    name: Ubuntu Unstable Builds
-    runs-on: ubuntu-latest
     
-    steps:
-    - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 7.0.x
+        
     - name: Restore dependencies
       run: dotnet restore
+      
     - name: Build
-      run: dotnet build --no-restore
+      uses: EasyDesk/action-dotnet-publish@v1.0.0
+      with:
+        path: "RiftRipper/RiftRipper.csproj"
+        output-dir: "builds/${{ matrix.target }}"
+        build-configuration: ${{ matrix.kind }}
+        skip-build: false
+
+    - name: Packaging
+      shell: bash
+      run: |
+        # Define variables
+        commit_hash=$(git rev-parse --short "$GITHUB_SHA")
+        build_date=$(date +'%Y-%m-%d')
+        release_name="RiftRipper-nightly-${build_date}.${commit_hash}.${{ matrix.target }}"
+        echo "$release_name"
+        
+        if [ "${{ matrix.target }}" == "win-x64" ]; then
+          zip -r "${release_name}.zip" "builds/${{ matrix.target }}"
+        else
+          tar -czvf "${release_name}.tar.gz" "builds/${{ matrix.taget }}"
+        fi
+        wait
+        
+        rm -r "builds/${{ matrix.target }}"
+        wait
+
+#    - name: Build
+#      shell: bash
+#      run: |
+#        # Define variables
+#        commit_hash=$(git rev-parse --short "$GITHUB_SHA")
+#        build_date=$(date +'%Y-%m-%d')
+#        release_name="RiftRipper-nightly-${build_date}.${commit_hash}.${{ matrix.target }}"
+#        echo "$release_name"
+#        
+#        # Build
+#        dotnet publish RiftRipper.sln --runtime "${{ matrix.target }}" -f=net7.0 -c "${{ matrix.kind }}" #-o "$release_name"
+#        ls -R ../../
+#        
+#        # Pack files
+#        tar -czvf "${release_name}.tar.gz" "$release_name"
+#        
+#        # Delete output dir
+#        rm -r "$release_name"
+      
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      
+    - name: Publish
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        name: Nightly Builds
+        tag: 'nightly'
+        artifacts: RiftRipper-nightly-*.zip
+        allowUpdates: true
+        draft: false
+        omitBodyDuringUpdate: true
+        omitDraftDuringUpdate: true
+        omitNameDuringUpdate: true
+        prerelease: true
+        replacesArtifacts: false
+        skipIfReleaseExists: false

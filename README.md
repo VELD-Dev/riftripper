@@ -54,6 +54,13 @@ RiftRipper is made to be compatible with the edits you will or would make with *
 - Allow team work on levels, using a project system that only saves the ID of edited object, and all their metadatas. *(absolute rotation, absolute position, absolute scale, type, model TUID and instance parameters)*
 - For users who don't want to edit levels, bundle several edits in one file, as long as they do not edit the same map.
 
+## Installation
+Here are some steps you should check before downloading **RiftRipper**.
+- 🖥️ RiftRipper is actually only compatible with **Windows 8.1 and higher**, and **Linux/Ubuntu 21+** (older versions have not been tested).
+- 📚 Check if you have **.NET 7.0** installed on your computer. If not, [**download it here**](https://download.visualstudio.microsoft.com/download/pr/4c0aaf08-3fa1-4fa0-8435-73b85eee4b32/e8264b3530b03b74b04ecfcf1666fe93/dotnet-sdk-7.0.306-win-x64.exe "Official link at https://download.visualstudio.microsoft.com/").
+- ⚠️ The archive file you download from **Releases** page is not an installer, be careful and store the software somewhere you'll not lose it!
+- ⚠️ Riftripper is still very work in progress. To see what is actually working in the latest version of the level editor, please refer to the next section.
+
 ---
 
 # About Nightly Builds

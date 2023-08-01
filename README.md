@@ -13,8 +13,7 @@ RiftRipper is made to be compatible with the edits you will or would make with *
 * 🌃 [**About Nightly Builds**](#-about-nightly-builds) (It's very important, **READ THIS PART**)
   * 🚧 [**TODO list** (features working in Nightly builds)](#-todo-list-features-working-in-nightly-builds)
 * ℹ️ [*v1.0.0 Information*](#ℹ️-v100-information)
-  * 🔑 [*Key Features for the v1.0.0*](#-key-features-for-the-v100)
-  * ⏱️ [*Key Features planned (long term)*](#%EF%B8%8F-key-features-planned-long-term)
+  * 🔑 [*Key Features for the v1.0.0*](#-todo-list--features-for-the-v100)
 * 📥 [**Installation**](#-installation)
 
 ---
@@ -35,8 +34,6 @@ General information about the software, such as the compatibility list.
 ❔: Compatibility will be defined depending on the game engine version, if it is close enough to RiftRipper extracting and editing library.  
 ❌: Compatibility will not be ensured or will not be checked, or the compatibility will be impossible because of the engine version.  
 > <sup>1</sup><sub>Wolverine should be supported on its launch, but the compatibility status may change on release and become incompatible.</sub>
-
----
 
 # 🌃 About Nightly Builds
 Nightly builds are highly unstable builds that are updated on every single change made to the editor.  
@@ -71,11 +68,9 @@ All the features here are listed in the order they will be done.
 - [ ] Create portals to move to different levels. *(It should probably be possible)*
 - [ ] We'll see in the future when I'll get there.
 
----
-
 # ℹ️ v1.0.0 Information
 
-## 🔑 Key Features for the `v1.0.0`
+## 🔑 TODO List / features for the `v1.0.0`
 - ✅ Open and view a level.
 - ✅ Extract the model as an OBJ or FBX model.
 - ✅ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
@@ -96,17 +91,7 @@ All the features here are listed in the order they will be done.
 ❌: Will for sure **not** be support for this version. Maybe in the future ?  
 ⚔️: Will not be handled by the level editor. **You better check the other tool "[Ripped Apart](https://github.com/chaoticgd/ripped_apart)" made by <ins>chaoticgd</ins>.**  
   
-> <sup>**1**</sup> <sub>You can do that with Ripped Apart, and as long as you have saved your edits in the game files, RiftRipper will show those anyway. Same for every custom entities and custom advanced objects, like custom particles, custom triggerboxes, custom activation objects or whatever.</sub>  
-
-## ⏱️ Key Features planned (long term)
-- Open, view, edit and repack one or several levels.
-- Edit models and textures of environment models.
-- Edit instance parameters of every entities (crates, portals, swingers, enemies, etc...)
-- Add and place custom models in the world.
-- Edit collisions of the terrain, of objects and of simple entities (the ones that do not have bones, like crates)
-- Add custom simple objects, such as destructible objects, world assets (with collision).
-- Allow team work on levels, using a project system that only saves the ID of edited object, and all their metadatas. *(absolute rotation, absolute position, absolute scale, type, model TUID and instance parameters)*
-- For users who don't want to edit levels, bundle several edits in one file, as long as they do not edit the same map.
+> <sup>**1**</sup> <sub>You can do that with Ripped Apart, and as long as you have saved your edits in the game files, RiftRipper will show those anyway. Same for every custom entities and custom advanced objects, like custom particles, custom triggerboxes, custom activation objects or whatever.</sub>
 
 ---
 
@@ -116,5 +101,3 @@ Here are some steps you should check before downloading **RiftRipper**.
 - 📚 Check if you have **.NET 7.0** installed on your computer. If not, [**download it here**](https://download.visualstudio.microsoft.com/download/pr/4c0aaf08-3fa1-4fa0-8435-73b85eee4b32/e8264b3530b03b74b04ecfcf1666fe93/dotnet-sdk-7.0.306-win-x64.exe "Official link at https://download.visualstudio.microsoft.com/").
 - ⚠️ The archive file you download from **Releases** page is not an installer, be careful and store the software somewhere you'll not lose it!
 - ⚠️ Riftripper is still very work in progress. To see what is actually working in the latest version of the level editor, please refer to the next section.
-
----

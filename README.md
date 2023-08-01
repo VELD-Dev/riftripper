@@ -3,11 +3,26 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/VELD-Dev/riftripper/total)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/VELD-Dev/riftripper/dotnet.yml?label=nightly-builds)  
 
-Riftripper is a tool made in C# to view, extract and edit maps of Ratchet and Clank Rift Apart, Spiderman (PS5/PC) and potentially Ratchet and Clank 2016.  
+Riftripper is a tool made in C# to view, extract and edit maps of R**atchet and Clank: Rift Apart**, **Spiderman (PS5/PC)** and potentially **Ratchet and Clank 2016**.  
 
 RiftRipper is made to be compatible with the edits you will or would make with **Ripped Apart** by **chaoticgd**: [**chaoticgd/ripped_apart**](https://github.com/chaoticgd/ripped_apart)
 
-## Compatibility list for the `v1.0.0`
+## Summary
+* 🌐 [*General information*](#-general-information)
+  * ✅ [**Compatibility list**](#-compatibility-list)
+* 🌃 [**About Nightly Builds**](#-about-nightly-builds) (It's very important, **READ THIS PART**)
+  * 🚧 [**TODO list** (features working in Nightly builds)](#-todo-list-features-working-in-nightly-builds)
+* ℹ️ [*v1.0.0 Information*](#ℹ️-v100-information)
+  * 🔑 [*Key Features for the v1.0.0*](#-key-features-for-the-v100)
+  * ⏱️ [*Key Features planned (long term)*](#%EF%B8%8F-key-features-planned-long-term)
+* 📥 [**Installation**](#-installation)
+
+---
+
+# 🌐 General information
+General information about the software, such as the compatibility list.
+
+## ✅ Compatibility list
 - ✅ Ratchet & Clank: Rift Apart (PC)
 - ❔ Ratchet & Clank: Rift Apart (PS5)
 - ❔ Ratchet & Clank (2016)
@@ -21,55 +36,17 @@ RiftRipper is made to be compatible with the edits you will or would make with *
 ❌: Compatibility will not be ensured or will not be checked, or the compatibility will be impossible because of the engine version.  
 > <sup>1</sup><sub>Wolverine should be supported on its launch, but the compatibility status may change on release and become incompatible.</sub>
 
-## Key Features for the `v1.0.0`
-- ✅ Open and view a level.
-- ✅ Extract the model as an OBJ or FBX model.
-- ✅ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
-- ❔ Extract the textures.
-- ❔ Repack the edits in a new file with new TOC/DAG files in order to just have to replace the orginal DAG and TOC instead of re-downloading the entire game.
-- ❔ Edit the levels and save the edits in the original level or in a project file.
-- ❌ Edit instance parameters of entities.
-- ❌ Make new portals of any kind (on Ratchet & Clank: Rift Apart).
-- ❌ Bundle several mods without breaking other mods (for that, users will have to edit themselves the mods to bundle those together).
-- ❌ Export animations.
-- ❌ Edit gameplay features/game's code.
-- ❌ Swap/change/edit environment models
-- ❌ Swap/change/edit textures
-- ⚔️ Swap/change/edit entities models<sup>**1**</sup>.  
-  
-✅: Will be supported, at least for **Ratchet & Clank: Rift Apart**.  
-❔: Depending on what is being discovered and reversed, and depending on the events, it may possibly be supported. So maybe.  
-❌: Will for sure **not** be support for this version. Maybe in the future ?  
-⚔️: Will not be handled by the level editor. **You better check the other tool "[Ripped Apart](https://github.com/chaoticgd/ripped_apart)" made by <ins>chaoticgd</ins>.**  
-  
-> <sup>**1**</sup> <sub>You can do that with Ripped Apart, and as long as you have saved your edits in the game files, RiftRipper will show those anyway. Same for every custom entities and custom advanced objects, like custom particles, custom triggerboxes, custom activation objects or whatever.</sub>  
-
-## Key Features planned (long term)
-- Open, view, edit and repack one or several levels.
-- Edit models and textures of environment models.
-- Edit instance parameters of every entities (crates, portals, swingers, enemies, etc...)
-- Add and place custom models in the world.
-- Edit collisions of the terrain, of objects and of simple entities (the ones that do not have bones, like crates)
-- Add custom simple objects, such as destructible objects, world assets (with collision).
-- Allow team work on levels, using a project system that only saves the ID of edited object, and all their metadatas. *(absolute rotation, absolute position, absolute scale, type, model TUID and instance parameters)*
-- For users who don't want to edit levels, bundle several edits in one file, as long as they do not edit the same map.
-
-## Installation
-Here are some steps you should check before downloading **RiftRipper**.
-- 🖥️ RiftRipper is actually only compatible with **Windows 8.1 and higher**, and **Linux/Ubuntu 21+** (older versions have not been tested).
-- 📚 Check if you have **.NET 7.0** installed on your computer. If not, [**download it here**](https://download.visualstudio.microsoft.com/download/pr/4c0aaf08-3fa1-4fa0-8435-73b85eee4b32/e8264b3530b03b74b04ecfcf1666fe93/dotnet-sdk-7.0.306-win-x64.exe "Official link at https://download.visualstudio.microsoft.com/").
-- ⚠️ The archive file you download from **Releases** page is not an installer, be careful and store the software somewhere you'll not lose it!
-- ⚠️ Riftripper is still very work in progress. To see what is actually working in the latest version of the level editor, please refer to the next section.
-
 ---
 
-# About Nightly Builds
+# 🌃 About Nightly Builds
 Nightly builds are highly unstable builds that are updated on every single change made to the editor.  
 Soon, an auto-updating system will be incorporated to RiftRipper and you will be able to choose your update channel: **nightly** or **release**.  
 The nightly channel is recommended only for developers, because it has debug and symbol files, and it may slow your experience using it.  
-**If you want to use stable versions of the level editor, please only take releases!**
+**If you want to use stable versions of the level editor, please only take releases!**  
 
-## TODO list *(features working in Nightly builds)*
+**For the ones who were too lazy to read the text above like me, basically it means that it's the very latest versions containing all the features working in the level editor actually, and that the list below here are all the features that have been made and that are working.**
+
+## 🚧 TODO list *(features working in Nightly builds)*
 All the features here are listed in the order they will be done.
 - `[30-05-2023]` Project creation.
 - [x] `[08-06-2023]` Project creation and loading.
@@ -93,3 +70,51 @@ All the features here are listed in the order they will be done.
 - [ ] *(Create locomotion portals, with the input and output portals.)*
 - [ ] Create portals to move to different levels. *(It should probably be possible)*
 - [ ] We'll see in the future when I'll get there.
+
+---
+
+# ℹ️ v1.0.0 Information
+
+## 🔑 Key Features for the `v1.0.0`
+- ✅ Open and view a level.
+- ✅ Extract the model as an OBJ or FBX model.
+- ✅ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
+- ❔ Extract the textures.
+- ❔ Repack the edits in a new file with new TOC/DAG files in order to just have to replace the orginal DAG and TOC instead of re-downloading the entire game.
+- ❔ Edit the levels and save the edits in the original level or in a project file.
+- ❌ Edit instance parameters of entities.
+- ❌ Make new portals of any kind (on Ratchet & Clank: Rift Apart).
+- ❌ Bundle several mods without breaking other mods (for that, users will have to edit themselves the mods to bundle those together).
+- ❌ Export animations.
+- ❌ Edit gameplay features/game's code.
+- ❌ Swap/change/edit environment models
+- ❌ Swap/change/edit textures
+- ⚔️ Swap/change/edit entities models<sup>**1**</sup>.  
+  
+✅: Will be supported, at least for **Ratchet & Clank: Rift Apart**.  
+❔: Depending on what is being discovered and reversed, and depending on the events, it may possibly be supported. So maybe.  
+❌: Will for sure **not** be support for this version. Maybe in the future ?  
+⚔️: Will not be handled by the level editor. **You better check the other tool "[Ripped Apart](https://github.com/chaoticgd/ripped_apart)" made by <ins>chaoticgd</ins>.**  
+  
+> <sup>**1**</sup> <sub>You can do that with Ripped Apart, and as long as you have saved your edits in the game files, RiftRipper will show those anyway. Same for every custom entities and custom advanced objects, like custom particles, custom triggerboxes, custom activation objects or whatever.</sub>  
+
+## ⏱️ Key Features planned (long term)
+- Open, view, edit and repack one or several levels.
+- Edit models and textures of environment models.
+- Edit instance parameters of every entities (crates, portals, swingers, enemies, etc...)
+- Add and place custom models in the world.
+- Edit collisions of the terrain, of objects and of simple entities (the ones that do not have bones, like crates)
+- Add custom simple objects, such as destructible objects, world assets (with collision).
+- Allow team work on levels, using a project system that only saves the ID of edited object, and all their metadatas. *(absolute rotation, absolute position, absolute scale, type, model TUID and instance parameters)*
+- For users who don't want to edit levels, bundle several edits in one file, as long as they do not edit the same map.
+
+---
+
+# 📥 Installation
+Here are some steps you should check before downloading **RiftRipper**.
+- 🖥️ RiftRipper is actually only compatible with **Windows 8.1 and higher**, and **Linux/Ubuntu 21+** (older versions have not been tested).
+- 📚 Check if you have **.NET 7.0** installed on your computer. If not, [**download it here**](https://download.visualstudio.microsoft.com/download/pr/4c0aaf08-3fa1-4fa0-8435-73b85eee4b32/e8264b3530b03b74b04ecfcf1666fe93/dotnet-sdk-7.0.306-win-x64.exe "Official link at https://download.visualstudio.microsoft.com/").
+- ⚠️ The archive file you download from **Releases** page is not an installer, be careful and store the software somewhere you'll not lose it!
+- ⚠️ Riftripper is still very work in progress. To see what is actually working in the latest version of the level editor, please refer to the next section.
+
+---

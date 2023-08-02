@@ -88,8 +88,6 @@ All the features here are listed in the order they will be done.
 ❔: Depending on what is being discovered and reversed, and depending on the events, it may possibly be supported. So maybe.  
 ❌: Will for sure **not** be support for this version. Maybe in the future ?  
 ⚔️: Will not be handled by the level editor. **You better check for an other tool.**
-  
-> <sup>**1**</sup> <sub>You can do that with Ripped Apart, and as long as you have saved your edits in the game files, RiftRipper will show those anyway. Same for every custom entities and custom advanced objects, like custom particles, custom triggerboxes, custom activation objects or whatever.</sub>
 
 ---
 

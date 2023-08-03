@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RiftRipperLib.DAT1.Sections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,18 @@ internal static class ViewMenuDraw
             return;
 
         wnd.showFramerate = !wnd.showFramerate;
+    }
+
+    internal static void ShowArchiveExplorer(Window wnd)
+    {
+
+        var frameAlreadyOpened = wnd.IsAnyFrameOpened<ArchiveExplorerFrame>();
+        if (!ImGui.MenuItem("Archive explorer", "", frameAlreadyOpened, wnd.DAT1Manager != null))
+            return;
+
+        if(frameAlreadyOpened)
+            wnd.TryCloseFirstFrame<ArchiveExplorerFrame>();
+        else
+            wnd.AddFrame(new ArchiveExplorerFrame(wnd));
     }
 }

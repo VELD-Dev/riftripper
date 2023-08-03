@@ -27,12 +27,13 @@ public class ProjectSettingsFrame : Frame
 
     public override void Render(float deltaTime)
     {
-        ImGui.Text(loadedProject.Name);
+        ImGui.BeginGroup();
+        ImGui.InputTextWithHint("Project name", "'My first project!', etc...", ref loadedProject.Name, 64);
     }
 
     public override void RenderAsWindow(float deltaTime)
     {
-        ImGui.SetWindowSize(new System.Numerics.Vector2(800, 600));
+        ImGui.SetNextWindowSize(new System.Numerics.Vector2(800, 600));
         base.RenderAsWindow(deltaTime);
     }
 

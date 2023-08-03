@@ -9,7 +9,7 @@ namespace RiftRipperLib;
 
 public class StreamHelper : BinaryReader
 {
-    public long Position { get { return BaseStream.Position; } set { BaseStream.Position = value; } }
+    public ulong Position { get { return (ulong)BaseStream.Position; } set { BaseStream.Position = (long)value; } }
 
     public StreamHelper(Stream input) : base(input) { }
 
@@ -26,10 +26,20 @@ public class StreamHelper : BinaryReader
         return buffer;
     }
 
-    public byte[] Read(int size, long offset, bool relative = true)
+    public byte[] Read(int size, long offset = 0x0, bool relative = true)
     {
         var buffer = new byte[size];
-        BaseStream.Read(buffer, (int)offset, size);
+        if (relative)
+        {
+            Jump((int)offset);
+            BaseStream.Read(buffer);
+        }
+        else
+        {
+            Seek((ulong)offset);
+            BaseStream.Read(buffer);
+        }
+
         return buffer;
     }
 
@@ -37,7 +47,7 @@ public class StreamHelper : BinaryReader
     /// Seek, moves, to the offset in the stream. It's absolute.
     /// </summary>
     /// <param name="offset">Offset where you want to go in the stream.</param>
-    public void Seek(long offset) => BaseStream.Seek(offset, SeekOrigin.Begin);
+    public void Seek(ulong offset) => BaseStream.Seek((long)offset, SeekOrigin.Begin);
 
     /// <summary>
     /// Jumps from the current position to current position + size
@@ -52,8 +62,9 @@ public class StreamHelper : BinaryReader
     /// <param name="offset">Offset where you want to peek.</param>
     /// <param name="relative">Wether this offset is relative or absolute.</param>
     /// <returns>Buffer of peeked bytes.</returns>
-    public byte[] Peek(int size = 0x0, long offset = 0x0, bool relative = true)
+    public byte[] Peek(int size = 0x1, long offset = 0x0, bool relative = true)
     {
+        Console.WriteLine($"[o:0x{Position:X}] Peeking 0x{size:X} bytes at +0x{offset:X} (0x{Position + (ulong)offset:X})");
         var previous_offset = Position;
         byte[] buffer = Read(size, offset, relative);
         Seek(previous_offset);
@@ -196,15 +207,15 @@ public class StreamHelper : BinaryReader
     /// Reads a string of size <c>size</c> or reads until there's no string to read anymore (until it sees a <c>0x00</c> byte)
     /// </summary>
     /// <param name="end_offset">This returns the end offset of the string, if it's ever needed to reach the next string without knowing the offset of the next string.</param>
-    /// <param name="size">Size of the string. Leave it at -1 if you want to read a string until it sees a byte <c>0x00</c>.</param>
+    /// <param name="size">Maximal size of the string, if a byte <c>0x00</c> is encountered before, the string will be shorter than the size.</param>
     /// <param name="offset">Offset where it should read the string.</param>
     /// <param name="relative">Wether this offset should be relative or absolute.</param>
     /// <returns>The string decoded as ANSI.</returns>
-    public string ReadString(out long end_offset, long offset = 0x0, bool relative = true, int size = -1)
+    public string ReadString(out ulong end_offset, long offset = 0x0, bool relative = true, int size = -1)
     {
         var sb = new StringBuilder();
 
-        int relative_pos = 0;
+        uint relative_pos = 0;
         if (size > 0)
         {
             for (int i = 0; i < size; i++)

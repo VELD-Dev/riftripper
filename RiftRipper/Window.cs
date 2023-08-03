@@ -1,11 +1,13 @@
 ﻿using System.Reflection;
-using RiftRipper.Drawing;
+using RiftRipper.Utility.Luna;
 using FileDialog = RiftRipper.Utility.FileDialog;
+using Vector2 = System.Numerics.Vector2;
 
 namespace RiftRipper;
 
 public class Window : GameWindow
 {
+    public static Window mainInstance = null;
     public string oglVersionString = "Unkown OpenGL version";
     private ImGuiController controller;
     private List<Frame> openFrames;
@@ -15,6 +17,8 @@ public class Window : GameWindow
     public EditorConfigs Settings = EditorConfigs.TryLoadOrCreateSettings(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Settings.json"));
     internal bool showFramerate = false;
     internal float Framerate;
+    internal Vector4 screenSafeSpace;
+    internal DAT1Manager DAT1Manager;
 
 
     public string[] args { get; private set; }
@@ -25,6 +29,7 @@ public class Window : GameWindow
         this.args = args;
         this.VSync = VSyncMode.On;
         openFrames = new List<Frame>();
+        Window.mainInstance = this;
     }
 
     public void AddFrame(Frame frame)
@@ -32,6 +37,20 @@ public class Window : GameWindow
         openFrames.Add(frame);
     }
 
+    public bool IsAnyFrameOpened<T>() where T : Frame
+    {
+        return openFrames.Any(f => f.GetType() == typeof(T));
+    }
+
+    public void TryCloseFirstFrame<T>() where T : Frame
+    {
+        if(IsAnyFrameOpened<T>())
+        {
+            var frameToClose = openFrames.First(f => f.GetType() == typeof(T));
+            frameToClose.isOpen = false;
+        }
+    }
+ 
     public static bool FrameMustClose(Frame frame)
     {
         return !frame.isOpen;
@@ -53,6 +72,8 @@ public class Window : GameWindow
 
         controller = new ImGuiController(ClientSize.X, ClientSize.Y);
 
+        screenSafeSpace = new(0, 0, ImGui.GetMainViewport().Size.X, ImGui.GetMainViewport().Size.Y);
+
         GL.Enable(EnableCap.DepthTest);
         GL.Enable(EnableCap.Texture2D);
 
@@ -71,13 +92,19 @@ public class Window : GameWindow
                     switch (argname)
                     {
                         case "PATH":
-                            Program.ProvidedPath = argvalue;
+                            openedGamePath = argvalue;
+                            if (openedGamePath.EndsWith(".exe"))
+                            {
+                                ErrorHandler.Alert("The provided Path is not valid! It must be the game FOLDER.");
+                                break;
+                            }
+                            DAT1Manager = new(openedGamePath);
                             break;
                         default:
                             Console.Write(
                                 $"Unknown argument '{argname}' with value '{argvalue}'\n"+
                                  "Case does not matter for arguments name. Allowed arguments:\n"+
-                                 "\t\t\t\t- Path='P:\\ath\\To\\The\\File.ext' -- Loads instantly the level or the whole game.\n"+
+                                 "\t\t\t\t- Path='P:\\ath\\To\\The\\File.ext' -- Loads instantly the game.\n"+
                                  "\t\t\t\t- Transparency=<true/false> -- Wether the level should load with transparency instantly. Can be changed later in editor settings."+
                                  "\t\t\t\t- CustomShader='P:\\ath\\To\\The\\File.glsl' -- Load a custom shader added over the existing ones. Can be changed later in the editor settings."
                                 );
@@ -164,53 +191,89 @@ public class Window : GameWindow
     private void RenderUI(float deltaTime)
     {
         RenderMenuBar();
+        RenderDockSpace();
 
-        foreach (Frame frame in openFrames)
+        foreach (Frame frame in openFrames.ToList())
             frame.RenderAsWindow(deltaTime);
+    }
+
+    private void CreateDockLayout()
+    {
+        uint dockspaceId = ImGui.GetID("dockspace");
+    }
+
+    private void RenderDockSpace()
+    {
+        ImGuiWindowFlags windowFlags = ImGuiWindowFlags.NoDocking
+            | ImGuiWindowFlags.NoTitleBar
+            | ImGuiWindowFlags.NoCollapse
+            | ImGuiWindowFlags.NoResize
+            | ImGuiWindowFlags.NoMove
+            | ImGuiWindowFlags.NoBringToFrontOnFocus
+            | ImGuiWindowFlags.NoNavFocus;
+        ImGui.SetNextWindowViewport(ImGui.GetWindowViewport().ID);
+        //ImGui.SetNextWindowPos(new(screenSafeSpace.X, screenSafeSpace.Y));
+        //ImGui.SetNextWindowSize(new(screenSafeSpace.Z, screenSafeSpace.W));
+        ImGui.SetNextWindowPos(ImGui.GetMainViewport().WorkPos);
+        ImGui.SetNextWindowSize(ImGui.GetMainViewport().WorkSize);
+
+        ImGui.PushStyleVar(ImGuiStyleVar.WindowPadding, 0);
+        ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0);
+        ImGui.Begin("dockspace", windowFlags);
+        ImGui.PopStyleVar();
+
+        uint dockspaceId = ImGui.GetID("dockspace");
+        ImGui.DockSpace(dockspaceId, new Vector2(0, 0), ImGuiDockNodeFlags.None);
     }
 
     private void RenderMenuBar()
     {
-        if (ImGui.BeginMainMenuBar())
+        if (!ImGui.BeginMainMenuBar())
+            return;
+
+        if (ImGui.BeginMenu("File"))
         {
-            if (ImGui.BeginMenu("File"))
-            {
-                FileMenuDraw.OpenGameMenuItem(this);
-                ImGui.Separator();
-                FileMenuDraw.CreateRiftProjectMenuItem(this);
-                FileMenuDraw.OpenRiftProjectMenuItem(this);
-                FileMenuDraw.CloseActiveProjectMenuItem(this);
-                ImGui.Separator();
-                FileMenuDraw.CloseRiftripperMenuItem(this);
-                ImGui.EndMenu();
-            }
-            if (ImGui.BeginMenu("Edit"))
-            {
-                EditMenuDraw.EditorSettingsMenuItem(this);
-                EditMenuDraw.ProjectSettingsMenuItem(this);
-                ImGui.Separator();
-                if (ImGui.BeginMenu("Tools"))
-                {
-                    EditMenuDraw.ToolsMenuDraw.CreateLocalPortalMenuItem(this);
-                    EditMenuDraw.ToolsMenuDraw.CreateDisplacementPortalMenuItem(this);
-                    EditMenuDraw.ToolsMenuDraw.CreateLevelPortalMenuItem(this);
-                    EditMenuDraw.ToolsMenuDraw.CreatePocketRiftPortalMenuItem(this);
-                    ImGui.EndMenu();
-                }
-                ImGui.EndMenu();
-            }
-            if (ImGui.BeginMenu("View"))
-            {
-                ViewMenuDraw.ShowFramerateMenuItem(this);
-                ImGui.EndMenu();
-            }
-            if (ImGui.BeginMenu("About"))
-            {
-                AboutMenuDraw.OfficialGithubRepoMenuItem(this);
-                ImGui.EndMenu();
-            }
-            DebugMenuDraw.Menu(this);
-            ImGui.EndMainMenuBar();
+            FileMenuDraw.OpenGameMenuItem(this);
+            ImGui.Separator();
+            FileMenuDraw.CreateRiftProjectMenuItem(this);
+            FileMenuDraw.OpenRiftProjectMenuItem(this);
+            FileMenuDraw.CloseActiveProjectMenuItem(this);
+            ImGui.Separator();
+            FileMenuDraw.CloseRiftripperMenuItem(this);
+            ImGui.EndMenu();
         }
+        if (ImGui.BeginMenu("Edit"))
+        {
+            EditMenuDraw.EditorSettingsMenuItem(this);
+            EditMenuDraw.ProjectSettingsMenuItem(this);
+            ImGui.Separator();
+            if (ImGui.BeginMenu("Tools"))
+            {
+                EditMenuDraw.ToolsMenuDraw.CreateLocalPortalMenuItem(this);
+                EditMenuDraw.ToolsMenuDraw.CreateDisplacementPortalMenuItem(this);
+                EditMenuDraw.ToolsMenuDraw.CreateLevelPortalMenuItem(this);
+                EditMenuDraw.ToolsMenuDraw.CreatePocketRiftPortalMenuItem(this);
+                ImGui.EndMenu();
+            }
+            ImGui.EndMenu();
+        }
+        if (ImGui.BeginMenu("View"))
+        {
+            ImGui.SeparatorText("Overlay");
+            ViewMenuDraw.ShowFramerateMenuItem(this);
+
+            ImGui.SeparatorText("Windows");
+            ViewMenuDraw.ShowArchiveExplorer(this);
+            ImGui.EndMenu();
+        }
+        if (ImGui.BeginMenu("About"))
+        {
+            AboutMenuDraw.OfficialGithubRepoMenuItem(this);
+            ImGui.EndMenu();
+        }
+        DebugMenuDraw.Menu(this);
+        screenSafeSpace.Y = ImGui.GetWindowSize().Y - 1;
+        screenSafeSpace.W = ImGui.GetMainViewport().Size.Y - ImGui.GetWindowSize().Y - 1;
+        ImGui.EndMainMenuBar();
     }
 }

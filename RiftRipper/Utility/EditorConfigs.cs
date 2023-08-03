@@ -9,6 +9,7 @@ public class EditorConfigs
     public float RenderDistance;
     public float MoveSpeed;
     public float MaxSpeed;
+    public uint MSAA_Level;
     public Dictionary<string, string> CustomShaders;
 
     [JsonIgnore]
@@ -24,6 +25,7 @@ public class EditorConfigs
         RenderDistance = 300f;
         MoveSpeed = 10f;
         MaxSpeed = MoveSpeed * (4f/3f);
+        MSAA_Level = 2;
         CustomShaders = new Dictionary<string, string>();
     }
 

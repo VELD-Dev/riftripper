@@ -17,6 +17,7 @@ global using ImGuiNET;
 
 global using RiftRipper.Utility;
 global using RiftRipper.Frames;
+global using RiftRipper.Frames.Dockable;
 global using RiftRipper.Frames.Modals;
 global using RiftRipper.Drawing;
 

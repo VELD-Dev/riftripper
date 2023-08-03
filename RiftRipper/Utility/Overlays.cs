@@ -34,9 +34,9 @@ public class Overlays
             window_flags |= ImGuiWindowFlags.NoMove;
         }
         ImGui.SetNextWindowBgAlpha(0.35f); // Transparent background
-        if (ImGui.Begin("Example: Simple overlay", ref p_open, window_flags))
+        if (ImGui.Begin("Framerate overlay", ref p_open, window_flags))
         {
-            ImGui.Text("Simple overlay\n (right-click to change position)");
+            ImGui.Text("Statistics");
             ImGui.Separator();
             ImGui.Text($"Framerate: {wnd.Framerate}FPS");
             if (ImGui.BeginPopupContextWindow())

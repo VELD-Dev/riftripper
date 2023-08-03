@@ -10,7 +10,7 @@ internal static class FileMenuDraw
             return;
 
         var res = FileDialog.OpenFile("Select game executable", ".exe");
-        if (res.Length > 0)
+        if (res.Length < 1)
             return;
 
         Console.WriteLine($"Folder found: {Path.GetDirectoryName(res)}, must check if it's a game.");
@@ -19,11 +19,15 @@ internal static class FileMenuDraw
             case "RiftApart.exe":  // Must match perfectly.
                 Console.WriteLine($"Game is Ratchet & Clank: Rift Apart.");
                 wnd.openedGame = Games.RCRiftApart;
+                wnd.DAT1Manager = new Utility.Luna.DAT1Manager(Path.GetDirectoryName(res));
                 break;
             default:
                 Console.WriteLine("Game not supported.");
-                break;
+                return;
         }
+        var dirPath = Path.GetDirectoryName(res);
+        wnd.openedGamePath = dirPath;
+        wnd.AddFrame(new ArchiveExplorerFrame(wnd));
     }
 
     internal static void CreateRiftProjectMenuItem(Window wnd)

@@ -57,6 +57,7 @@ public class Project
         }
         else
         {
+            ErrorHandler.Alert("File or path does not exist!");
             return null;
         }
     }

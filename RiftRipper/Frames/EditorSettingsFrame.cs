@@ -41,15 +41,19 @@ public class EditorSettingsFrame : Frame
 #endif
         ImGui.EndGroup();
 
+        ImGui.Separator();
+
         ImGui.BeginGroup();
         if(ImGui.Button("Apply and save"))
         {
             settings.SaveSettingsToFile();
         }
+        ImGui.SameLine();
         if(ImGui.Button("Cancel"))
         {
             settings.ReloadSettings();
         }
+        ImGui.SameLine();
         if(ImGui.Button("Close"))
         {
             settings.ReloadSettings();

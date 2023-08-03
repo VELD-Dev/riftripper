@@ -56,7 +56,7 @@ unsafe public static class FontsManager
         }
         catch(Exception e)
         {
-            Console.WriteLine($"Failed to add font {fontName} ({fontPath}).\nError:{e}");
+            ErrorHandler.Alert($"Failed to add font {fontName} ({fontPath}).\n{e}");
             Fonts.Remove(fontName);
             Font = null;
             return false;

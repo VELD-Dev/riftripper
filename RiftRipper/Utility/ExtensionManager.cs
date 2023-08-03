@@ -21,26 +21,43 @@ public static class ExtensionManager
     /// <returns>True if the dissociation is successful, otherwise false.</returns>
     public static bool TryDissociateExtension(string Extension, string KeyName)
     {
-        Registry.ClassesRoot.OpenSubKey(Extension, true)?.DeleteSubKeyTree(Extension);
-        Registry.ClassesRoot.OpenSubKey(KeyName, true)?.DeleteSubKeyTree(KeyName);
+        try
+        {
+            Registry.ClassesRoot.OpenSubKey(Extension, true)?.DeleteSubKeyTree(Extension);
+            Registry.ClassesRoot.OpenSubKey(KeyName, true)?.DeleteSubKeyTree(KeyName);
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine("Impossible to dissociate the extension. Try running the program as administrator.");
+            Console.WriteLine(ex.ToString());
+        }
         return !IsAssociated(Extension, KeyName);
     }
 
     public static void AssociateExtension(string Extension, string Description, string KeyName)
     {
-        Registry.SetValue($@"HKEY_CLASSES_ROOT\{Extension}",
-            "", KeyName);
-        Registry.SetValue($@"HKEY_CLASSES_ROOT\{Extension}\OpenWithList\RiftRipper.exe",
-            "", "");
-        Registry.SetValue($@"HKEY_CLASSES_ROOT\{Extension}\OpenWithProgids",
-            KeyName, "");
-        Registry.SetValue(@"HKEY_CLASSES_ROOT\Applications\RiftRipper.exe\Shell\Open\Command",
-            "", $"\"{Application.ExecutablePath}\" Project=\"%1\"");
-        Registry.SetValue($@"HKEY_CLASSES_ROOT\{KeyName}",
-            "", Description);
-        //Registry.SetValue(@"HKEY_CLASSES_ROOT\" + KeyName + @"\DefaultIcon", "", "");
-        Registry.SetValue($@"HKEY_CLASSES_ROOT\{KeyName}\shell\Open\Command",
-            "", $"\"{Application.ExecutablePath}\" Project=\"%1\"");
+        try
+        {
+            Registry.SetValue($@"HKEY_CLASSES_ROOT\{Extension}",
+                "", KeyName);
+            Registry.SetValue($@"HKEY_CLASSES_ROOT\{Extension}\OpenWithList\RiftRipper.exe",
+                "", "");
+            Registry.SetValue($@"HKEY_CLASSES_ROOT\{Extension}\OpenWithProgids",
+                KeyName, "");
+            Registry.SetValue(@"HKEY_CLASSES_ROOT\Applications\RiftRipper.exe\Shell\Open\Command",
+                "", $"\"{Application.ExecutablePath}\" Project=\"%1\"");
+            Registry.SetValue($@"HKEY_CLASSES_ROOT\{KeyName}",
+                "", Description);
+            //Registry.SetValue(@"HKEY_CLASSES_ROOT\" + KeyName + @"\DefaultIcon", "", "");
+            Registry.SetValue($@"HKEY_CLASSES_ROOT\{KeyName}\shell\Open\Command",
+                "", $"\"{Application.ExecutablePath}\" Project=\"%1\"");
+
+            SHChangeNotify(0x08000000, 0x0000, IntPtr.Zero, IntPtr.Zero);
+        }
+        catch ( Exception ex )
+        {
+            ErrorHandler.Alert($"Extension association impossible: You must run this program as administrator.\n{ex}", false);
+        }
 
 
         /*
@@ -64,8 +81,6 @@ public static class ExtensionManager
         CurrentUser.DeleteSubKey("UserChoice", false);
         CurrentUser.Close();
         */
-
-        SHChangeNotify(0x08000000, 0x0000, IntPtr.Zero, IntPtr.Zero);
     }
 
     [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]

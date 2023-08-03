@@ -49,6 +49,7 @@ public class ImGuiController : IDisposable
         io.Fonts.AddFontDefault();
 
         io.BackendFlags |= ImGuiBackendFlags.RendererHasVtxOffset;
+        io.ConfigFlags |= ImGuiConfigFlags.DockingEnable | ImGuiConfigFlags.ViewportsEnable;
 
         CreateDeviceResources();
         SetKeyMappings();
@@ -198,7 +199,7 @@ void main()
     }
 
     /// <summary>
-    /// Updates ImGui input and IO configuration state.
+    /// Updates ImGui input and Luna configuration state.
     /// </summary>
     public void Update(GameWindow wnd, float deltaSeconds)
     {

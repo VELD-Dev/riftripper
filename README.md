@@ -49,6 +49,7 @@ All the features here are listed in the order they will be done.
 - *Little pause, waiting for the game to release on PC and some reverse engineering to be done.*
 - [ ] 🚧 Read `DAT1` files without extracting those.
 - [ ] Archives explorer without extraction.
+- [ ] Archives selective extraction.
 - [ ] Level viewing.
   - [ ] *Probably a huge optimization part.*
 - [ ] Level extracting to wavefront (`.obj`) files.

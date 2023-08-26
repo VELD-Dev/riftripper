@@ -19,6 +19,9 @@ public class DAT1Reader
     }
 
     public Header Header;
+
+    public StreamHelper Stream;
+
     public Dictionary<uint, Section> Sections { get { return Header.sections; } }
 
     /// <summary>
@@ -28,6 +31,7 @@ public class DAT1Reader
     public DAT1Reader(StreamHelper filestream)
     {
         Console.WriteLine("Started reading a DAT1 file.");
+        Stream = filestream;
         Header = new Header(filestream);
     }
 

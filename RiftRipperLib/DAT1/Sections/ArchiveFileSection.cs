@@ -1,9 +1,13 @@
-﻿namespace RiftRipperLib.DAT1.Sections;
+﻿using RiftRipperLib.FileSystem;
+
+namespace RiftRipperLib.DAT1.Sections;
 
 public class ArchiveFileSection : Section
 {
     public List<string> paths = new();
-    public ArchiveFileSection(StreamHelper filestream) : base(filestream) {}
+    public ArchiveFolder RootNode { get; private set; } = new ArchiveFolder();
+
+    public ArchiveFileSection(StreamHelper filestream) : base(filestream) { }
 
     public ArchiveFileSection ReadValues(StreamHelper filestream)
     {
@@ -21,6 +25,48 @@ public class ArchiveFileSection : Section
                 hasReachedEnd = true;
         }
         paths = stringPaths;
+        ConstructNodes();
         return this;
+    }
+
+    private void ConstructNodes()
+    {
+        foreach (string path in paths)
+        {
+            string[] pathSegments = path.Split('/');
+            ArchiveFolder? currentNode = RootNode;
+
+            foreach (string segment in pathSegments)
+            {
+                ArchiveNode? foundNode = currentNode?.Children.FirstOrDefault(child => child.Name == segment);
+
+                if (foundNode == null)
+                {
+                    ArchiveNode? newNode;
+
+                    if (segment == "")
+                    {
+                        newNode = RootNode;
+                    }
+                    else
+                    {
+                        newNode = new ArchiveFolder
+                        {
+                            Name = segment,
+                            Parent = currentNode,
+                            CreateDate = DateTime.Now,
+                            Type = "Folder"
+                        };
+                        currentNode?.Children.Add(newNode);
+                    }
+
+                    currentNode = newNode as ArchiveFolder;
+                }
+                else
+                {
+                    currentNode = foundNode as ArchiveFolder;
+                }
+            }
+        }
     }
 }

@@ -43,43 +43,4 @@ public static class ImGuiPlus
             ImGui.EndTooltip();
         }
     }
-
-    public struct DirectoryNode
-    {
-        public string FullPath;
-        public string FileName;
-        public List<DirectoryNode> Children;
-        public bool isDirectory;
-    }
-
-    public static DirectoryNode CreateDirNodeTreeFromPath(string rootPath)
-    {
-        DirectoryNode rootNode;
-        rootNode.FullPath = rootPath;
-        rootNode.FileName = Path.GetFileName(rootPath);
-        rootNode.isDirectory = rootPath.EndsWith("/");
-        if(rootNode.isDirectory)
-            RecursivelyAddDirNodes(rootNode, )
-    }
-
-    public static IEnumerable<DirectoryNode> EnumerateDirectChildren(string currentPath, List<string> allPaths)
-    {
-        foreach(string path in allPaths)
-        {
-            if (!path.StartsWith(currentPath))
-                continue;
-
-            if (currentPath.Split('\\').Length <= path.Split("/").Length)
-                continue;
-
-            if (currentPath.Split('\\').Length >= path.Split("/").Length + 1)
-                continue;
-            var node = new DirectoryNode();
-            node.FullPath = path;
-            node.FileName = path;
-            node.isDirectory = path.EndsWith("/");
-        }
-    }
-
-    public static void RecursivelyAddDirNodes()
 }

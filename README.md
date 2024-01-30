@@ -2,7 +2,7 @@
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/VELD-Dev/riftripper?label=stable)
 ![GitHub all releases](https://img.shields.io/github/downloads/VELD-Dev/riftripper/total)
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/VELD-Dev/riftripper/dotnet.yml?label=nightly-builds)
-![GitHub lines count (Tokei)](https://tokei.rs/b1/github/VELD-Dev/riftripper?category=lines)
+![GitHub lines count (Tokei)](https://tokei.rs/b1/github/VELD-Dev/riftripper?category=lines&type=CSharp)
 
 Riftripper is a tool made in C# to view, extract and edit maps of R**atchet and Clank: Rift Apart**, **Spiderman (PS5/PC)** and potentially **Ratchet and Clank 2016**.  
 

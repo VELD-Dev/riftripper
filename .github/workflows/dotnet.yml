@@ -5,11 +5,11 @@ name: Nightly Releases
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "nightly" ]
     paths:
     - "**.cs"
   pull_request:
-    branches: [ "main" ]
+    branches: [ "nightly" ]
     paths:
     - "**.cs"
 

@@ -8,6 +8,13 @@ public class MaterialManager
     {
         if (shaders.ContainsKey(name)) return shaders.First(x => x.Key == name).Value;
 
+        if(!File.Exists(vertexShaderPath) || !File.Exists(fragmentShaderPath))
+        {
+            var e = new FileNotFoundException($"One of the shader files was not found. See {name}.");
+            ErrorHandler.Alert(e);
+            return 0;
+        }
+
         string vertexSource = File.ReadAllText(vertexShaderPath);
         string fragmentSource = File.ReadAllText(fragmentShaderPath);
 

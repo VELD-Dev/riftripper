@@ -104,9 +104,9 @@ public class Window : GameWindow
                             Console.Write(
                                 $"Unknown argument '{argname}' with value '{argvalue}'\n"+
                                  "Case does not matter for arguments name. Allowed arguments:\n"+
-                                 "\t\t\t\t- Path='P:\\ath\\To\\The\\File.ext' -- Loads instantly the game.\n"+
-                                 "\t\t\t\t- Transparency=<true/false> -- Wether the level should load with transparency instantly. Can be changed later in editor settings."+
-                                 "\t\t\t\t- CustomShader='P:\\ath\\To\\The\\File.glsl' -- Load a custom shader added over the existing ones. Can be changed later in the editor settings."
+                                 "\t- Path='P:\\ath\\To\\The\\File.ext' -- Loads instantly the game.\n"+
+                                 "\t- Transparency=<true/false> -- Wether the level should load with transparency instantly. Can be changed later in editor settings."+
+                                 "\t- CustomShader='P:\\ath\\To\\The\\File.glsl' -- Load a custom shader added over the existing ones. Can be changed later in the editor settings."
                                 );
                             break;
                     }
@@ -155,7 +155,7 @@ public class Window : GameWindow
             Overlays.ShowOverlay(this, showFramerate);
         }
 
-        Title = openedProject is not null ? $"RiftRipper {Program.version} ({oglVersionString}) - Project {openedProject.Name} {openedProject.Version} by {openedProject.Author}" : $"RiftRipper {Program.version} ({oglVersionString})";
+        Title = openedProject is not null ? $"RiftRipper {Program.version} ({oglVersionString}) - {openedProject.Name} {openedProject.Version} by {openedProject.Author}" : $"RiftRipper {Program.version} ({oglVersionString})";
 
         GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
         GL.ClearColor(new Color4(48, 48, 48, 255));
@@ -197,11 +197,6 @@ public class Window : GameWindow
             frame.RenderAsWindow(deltaTime);
     }
 
-    private void CreateDockLayout()
-    {
-        uint dockspaceId = ImGui.GetID("dockspace");
-    }
-
     private void RenderDockSpace()
     {
         ImGuiWindowFlags windowFlags = ImGuiWindowFlags.NoDocking
@@ -212,8 +207,6 @@ public class Window : GameWindow
             | ImGuiWindowFlags.NoBringToFrontOnFocus
             | ImGuiWindowFlags.NoNavFocus;
         ImGui.SetNextWindowViewport(ImGui.GetWindowViewport().ID);
-        //ImGui.SetNextWindowPos(new(screenSafeSpace.X, screenSafeSpace.Y));
-        //ImGui.SetNextWindowSize(new(screenSafeSpace.Z, screenSafeSpace.W));
         ImGui.SetNextWindowPos(ImGui.GetMainViewport().WorkPos);
         ImGui.SetNextWindowSize(ImGui.GetMainViewport().WorkSize);
 

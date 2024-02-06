@@ -29,7 +29,7 @@ internal class ErrorAlertModal : Modal
             ImGui.Text(ErrorMessage);
         ImGui.Spacing();
 
-        ImGui.Text("Do not forget to screenshot this message if y");
+        ImGui.Text("You can report this error to veld.dev on Discord, or create a new issue.\nBe careful, do not make duplicates.");
         ImGui.Spacing();
 
         if (ImGui.Button("OK"))

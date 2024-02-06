@@ -29,6 +29,9 @@ public class ProjectSettingsFrame : Frame
     {
         ImGui.BeginGroup();
         ImGui.InputTextWithHint("Project name", "'My first project!', etc...", ref loadedProject.Name, 64);
+        ImGui.InputTextWithHint("Project author", "'VELD-Dev, and his clone', etc...", ref loadedProject.Author, 64);
+        ImGui.InputTextWithHint("Project author URL", "'https://github.com/VELD-Dev/'", ref loadedProject.AuthorUrl, 256);
+        ImGui.InputTextWithHint("Project version", "'0.0.1-snapshot', '1.0.1-release', etc...", ref loadedProject.Version, 24);
     }
 
     public override void RenderAsWindow(float deltaTime)

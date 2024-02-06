@@ -125,6 +125,13 @@ public class Window : GameWindow
         ImGui.PushStyleVar(ImGuiStyleVar.TabRounding, 5f);
         ImGui.PushStyleVar(ImGuiStyleVar.FrameRounding, 2.5f);
         ImGui.PushStyleVar(ImGuiStyleVar.GrabRounding, 2.5f);
+
+#if WIN
+        if(Settings.AskExtensionAssignation && !ExtensionManager.IsAssociated(".rift", Program.AppName))
+        {
+            AddFrame(new AssignExtensionModal(this));
+        }
+#endif
     }
 
     protected override void OnResize(ResizeEventArgs e)

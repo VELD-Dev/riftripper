@@ -5,11 +5,7 @@ namespace RiftRipper.Frames.Modals;
 internal class ErrorAlertModal : Modal
 {
     protected override string frameName { get; set; } = "An error occurred";
-    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.Modal
-        | ImGuiWindowFlags.AlwaysAutoResize
-        | ImGuiWindowFlags.NoDocking
-        | ImGuiWindowFlags.NoResize
-        | ImGuiWindowFlags.NoCollapse;
+    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoResize;
 
     public readonly string ErrorMessage;
     private bool isTextWrapped = false;

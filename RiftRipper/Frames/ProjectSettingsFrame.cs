@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vulkan.Win32;
 
 namespace RiftRipper.Frames;
 
@@ -32,10 +33,31 @@ public class ProjectSettingsFrame : Frame
         ImGui.InputTextWithHint("Project author", "'VELD-Dev, and his clone', etc...", ref loadedProject.Author, 64);
         ImGui.InputTextWithHint("Project author URL", "'https://github.com/VELD-Dev/'", ref loadedProject.AuthorUrl, 256);
         ImGui.InputTextWithHint("Project version", "'0.0.1-snapshot', '1.0.1-release', etc...", ref loadedProject.Version, 24);
+        ImGui.EndGroup();
+        ImGui.Separator();
+        ImGui.BeginGroup();
+        if(ImGui.Button("Save"))
+        {
+            loadedProject.SaveToFile(loadedProject.ProjectFilePath);
+        }
+        if(ImGui.Button("Cancel"))
+        {
+            loadedProject.ReloadProject();
+        }
+        if(ImGui.Button("Close"))
+        {
+            isOpen = !isOpen;
+        }
     }
 
     public override void RenderAsWindow(float deltaTime)
     {
+        if(window.openedProject == null)
+        {
+            isOpen = false;
+            loadedProject = null;
+        }
+
         ImGui.SetNextWindowSize(new System.Numerics.Vector2(800, 600));
         base.RenderAsWindow(deltaTime);
     }

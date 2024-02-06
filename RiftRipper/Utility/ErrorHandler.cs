@@ -10,7 +10,10 @@ internal static class ErrorHandler
 {
     public static void Alert(string message, bool textWrapped = true)
     {
+        Console.BackgroundColor = ConsoleColor.Red;
+        Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(message);
+        Console.ResetColor();
         Window.mainInstance.AddFrame(new ErrorAlertModal(Window.mainInstance, message, textWrapped));
     }
 

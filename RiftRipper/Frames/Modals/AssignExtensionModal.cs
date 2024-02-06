@@ -6,7 +6,7 @@ namespace RiftRipper.Frames.Modals;
 public class AssignExtensionModal : Modal
 {
     protected override string frameName { get; set; } = "Assign ?";
-    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.Modal | ImGuiWindowFlags.NoMove;
+    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoMove | ImGuiWindowFlags.NoResize;
 
     public AssignExtensionModal(Window wnd) : base(wnd)
     {
@@ -21,18 +21,18 @@ public class AssignExtensionModal : Modal
         {
             ExtensionManager.AssociateExtension(".rift", "RiftRipper Project", Program.AppName);
             window.Settings.AskExtensionAssignation = false;
-            ImGui.CloseCurrentPopup();
+            isOpen = !isOpen;
         }
         ImGui.SameLine();
         if (ImGui.Button("No, don't ask next time."))
         {
             window.Settings.AskExtensionAssignation = false;
-            ImGui.CloseCurrentPopup();
+            isOpen = !isOpen;
         }
         ImGui.SameLine();
         if (ImGui.Button("No"))
         {
-            ImGui.CloseCurrentPopup();
+            isOpen = !isOpen;
         }
     }
 

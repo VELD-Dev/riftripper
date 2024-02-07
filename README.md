@@ -29,7 +29,7 @@ General information about the software, such as the compatibility list.
 - ❌ Marvel's Spider-Man (2018) 
   
 ✅: Compatibility will be ensured.  
-❔: Compatibility will be defined depending on the game engine version, if it is close enough to RiftRipper extracting and editing library.  
+❔: Compatibility will be defined depending on the game engine version, if it is close enough to what the RiftRipper extracting and editing library can support.  
 ❌: Compatibility will not be ensured or will not be checked, or the compatibility will be impossible because of the engine version.  
 > <sup>1</sup><sub>Wolverine should be supported on its launch, but the compatibility status may change on release and become incompatible.</sub>
 

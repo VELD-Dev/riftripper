@@ -7,7 +7,7 @@
 Riftripper is a tool made in C# to view, extract and edit maps of R**atchet and Clank: Rift Apart**, **Spiderman (PS5/PC)** and potentially **Ratchet and Clank 2016**.  
 
 ## Summary
-* 🌐 [*General information*](#-general-information)
+* 🌐 [**General information**](#-general-information)
   * ✅ [*Compatibility list*](#-compatibility-list)
   * 🌃 [*About Nightly Builds*](#-about-nightly-builds) (It's very important, **READ THIS PART**)
   * 🚧 [*TODO list (features working in Nightly builds)*](#-todo-list-features-working-in-nightly-builds)

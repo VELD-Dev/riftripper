@@ -9,9 +9,8 @@ Riftripper is a tool made in C# to view, extract and edit maps of R**atchet and 
 ## Summary
 * 🌐 [*General information*](#-general-information)
   * ✅ [**Compatibility list**](#-compatibility-list)
-* 🌃 [**About Nightly Builds**](#-about-nightly-builds) (It's very important, **READ THIS PART**)
+  * 🌃 [**About Nightly Builds**](#-about-nightly-builds) (It's very important, **READ THIS PART**)
   * 🚧 [**TODO list** (features working in Nightly builds)](#-todo-list-features-working-in-nightly-builds)
-* ℹ️ [*v1.0.0 Information*](#ℹ️-v100-information)
   * 🔑 [*Key Features for the v1.0.0*](#-todo-list--features-for-the-v100)
 * 📥 [**Installation**](#-installation)
 
@@ -34,7 +33,7 @@ General information about the software, such as the compatibility list.
 ❌: Compatibility will not be ensured or will not be checked, or the compatibility will be impossible because of the engine version.  
 > <sup>1</sup><sub>Wolverine should be supported on its launch, but the compatibility status may change on release and become incompatible.</sub>
 
-# 🌃 About Nightly Builds
+## 🌃 About Nightly Builds
 Nightly builds are highly unstable builds that are updated on every single change made to the editor.  
 Soon, an auto-updating system will be incorporated to RiftRipper and you will be able to choose your update channel: **nightly** or **release**.  
 The nightly channel is recommended only for developers, because it has debug and symbol files, and it may slow your experience using it.  
@@ -48,11 +47,11 @@ All the features here are listed in the order they will be done.
 - [x] `[08-06-2023]` Project creation and loading.
 - [x] `[12-06-2023]` Editor settings saving.
 - *Little pause, waiting for the game to release on PC and some reverse engineering to be done.*
-- [ ] 🚧 Read `DAT1` files without extracting those.
+- [ ] 🚧 Level viewing.
+  - [ ] *Probably a huge optimization part.*
+- [ ] 🕰️ Read `DAT1` files without extracting those.
 - [ ] Archives explorer without extraction.
 - [ ] Archives selective extraction.
-- [ ] Level viewing.
-  - [ ] *Probably a huge optimization part.*
 - [ ] Level extracting to wavefront (`.obj`) files.
 - [ ] Level editing.
 - [ ] Duplicating objects.
@@ -67,8 +66,6 @@ All the features here are listed in the order they will be done.
 - [ ] *(Create locomotion portals, with the input and output portals.)*
 - [ ] Create portals to move to different levels. *(It should probably be possible)*
 - [ ] We'll see in the future when I'll get there.
-
-# ℹ️ v1.0.0 Information
 
 ## 🔑 TODO List / features for the `v1.0.0`
 - ✅ Open and view a level.

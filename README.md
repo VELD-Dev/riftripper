@@ -8,9 +8,9 @@ Riftripper is a tool made in C# to view, extract and edit maps of R**atchet and 
 
 ## Summary
 * 🌐 [*General information*](#-general-information)
-  * ✅ [**Compatibility list**](#-compatibility-list)
-  * 🌃 [**About Nightly Builds**](#-about-nightly-builds) (It's very important, **READ THIS PART**)
-  * 🚧 [**TODO list** (features working in Nightly builds)](#-todo-list-features-working-in-nightly-builds)
+  * ✅ [*Compatibility list*](#-compatibility-list)
+  * 🌃 [*About Nightly Builds*](#-about-nightly-builds) (It's very important, **READ THIS PART**)
+  * 🚧 [*TODO list (features working in Nightly builds)*](#-todo-list-features-working-in-nightly-builds)
   * 🔑 [*Key Features for the v1.0.0*](#-todo-list--features-for-the-v100)
 * 📥 [**Installation**](#-installation)
 

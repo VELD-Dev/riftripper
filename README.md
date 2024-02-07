@@ -23,10 +23,10 @@ General information about the software, such as the compatibility list.
 - ✅ Ratchet & Clank: Rift Apart (PC)
 - ❔ Ratchet & Clank: Rift Apart (PS5)
 - ❔ Ratchet & Clank (2016)
-- ❌ Marvel's Spider-Man (2018)
-- ❔ Marvel's Spider-Man: Miles Morales
+- ❔ Marvel's Wolverine<sup>1</sup> (2026)
 - ❔ Marvel's Spider-Man 2 (2023)
-- ❔ Marvel's Wolverine<sup>1</sup>  
+- ❔ Marvel's Spider-Man: Miles Morales
+- ❌ Marvel's Spider-Man (2018) 
   
 ✅: Compatibility will be ensured.  
 ❔: Compatibility will be defined depending on the game engine version, if it is close enough to RiftRipper extracting and editing library.  

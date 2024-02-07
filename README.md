@@ -69,11 +69,11 @@ All the features here are listed in the order they will be done.
 
 ## 🔑 TODO List / features for the `v1.0.0`
 - ✅ Open and view a level.
-- ✅ Extract the model as an OBJ or FBX model.
-- ✅ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
+- ✅ Extract models and levels as OBJ or FBX model files.
 - ❔ Extract the textures.
 - ❔ Repack the edits in a new file with new TOC/DAG files in order to just have to replace the orginal DAG and TOC instead of re-downloading the entire game.
 - ❔ Edit the levels and save the edits in the original level or in a project file.
+- ❌ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
 - ❌ Edit instance parameters of entities.
 - ❌ Make new portals of any kind (on Ratchet & Clank: Rift Apart).
 - ❌ Bundle several mods without breaking other mods (for that, users will have to edit themselves the mods to bundle those together).
@@ -84,7 +84,7 @@ All the features here are listed in the order they will be done.
 - ⚔️ Swap/change/edit entities models<sup>**1**</sup>.  
   
 ✅: Will be supported, at least for **Ratchet & Clank: Rift Apart**.  
-❔: Depending on what is being discovered and reversed, and depending on the events, it may possibly be supported. So maybe.  
+❔: Depending on what is being discovered and reversed, and depending on the events, it may possibly be supported. So, maybe.  
 ❌: Will for sure **not** be support for this version. Maybe in the future ?  
 ⚔️: Will not be handled by the level editor. **You better check for an other tool.**
 

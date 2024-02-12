@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using RiftRipper.Utility.Luna;
+using Veldrid;
 using FileDialog = RiftRipper.Utility.FileDialog;
 using Vector2 = System.Numerics.Vector2;
 
@@ -7,7 +8,7 @@ namespace RiftRipper;
 
 public class Window : GameWindow
 {
-    public static Window mainInstance = null;
+    public static Window Singleton = null;
     public string oglVersionString = "Unkown OpenGL version";
     private ImGuiController controller;
     private List<Frame> openFrames;
@@ -29,7 +30,7 @@ public class Window : GameWindow
         this.args = args;
         this.VSync = VSyncMode.On;
         openFrames = new List<Frame>();
-        Window.mainInstance = this;
+        Window.Singleton = this;
     }
 
     public void AddFrame(Frame frame)
@@ -89,24 +90,35 @@ public class Window : GameWindow
 
                 if(argvalue is not null)
                 {
-                    switch (argname)
+                    switch (argname.ToUpper())
                     {
-                        case "PATH":
+                        case "-PATH":
                             openedGamePath = argvalue;
                             if (openedGamePath.EndsWith(".exe"))
                             {
-                                ErrorHandler.Alert("The provided Path is not valid! It must be the game FOLDER.");
+                                ErrorHandler.Alert("The provided Path is not valid! It must be the game folder.");
                                 break;
                             }
                             DAT1Manager = new(openedGamePath);
                             break;
+                        case "-PROJECT":
+                            if(Project.TryOpenFromFile(argvalue, out var proj))
+                            {
+                                openedProject = proj;
+                            }
+                            else
+                            {
+                                ErrorHandler.Alert("The provided Project is not valid!");
+                            }
+                            break;
                         default:
-                            Console.Write(
+                            Console.WriteLine(
                                 $"Unknown argument '{argname}' with value '{argvalue}'\n"+
                                  "Case does not matter for arguments name. Allowed arguments:\n"+
-                                 "\t- Path='P:\\ath\\To\\The\\File.ext' -- Loads instantly the game.\n"+
-                                 "\t- Transparency=<true/false> -- Wether the level should load with transparency instantly. Can be changed later in editor settings."+
-                                 "\t- CustomShader='P:\\ath\\To\\The\\File.glsl' -- Load a custom shader added over the existing ones. Can be changed later in the editor settings."
+                                 "\t-Path='P:\\ath\\To\\The\\File.ext' -- Loads instantly the game.\n"+
+                                 "\t-Project='P:\\ath\\To\\Project.rift' -- Loads instantly a project.\n"+
+                                 "\t-Transparency=<true/false> -- Wether the level should load with transparency instantly. Can be changed later in editor settings."+
+                                 "\t-CustomShader='P:\\ath\\To\\The\\File.glsl' -- Load a custom shader added over the existing ones. Can be changed later in the editor settings."
                                 );
                             break;
                     }
@@ -116,8 +128,6 @@ public class Window : GameWindow
                 }
             }
         }
-
-        FontsManager.LoadDefaultFont("KanitRegular", Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Assets", "Fonts", "Kanit", "Kanit-Regular.ttf"));
 
         // Setting ImGui default settings
         ImGui.PushStyleVar(ImGuiStyleVar.WindowBorderSize, 0f);
@@ -132,6 +142,8 @@ public class Window : GameWindow
             AddFrame(new AssignExtensionModal(this));
         }
 #endif
+        ImFontPtr ftptr = ImGui.GetIO().Fonts.AddFontFromFileTTF(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Assets", "Fonts", "Kanit", "Kanit-Regular.ttf"), 15);
+        ImGui.PushFont(ftptr);
     }
 
     protected override void OnResize(ResizeEventArgs e)
@@ -153,7 +165,7 @@ public class Window : GameWindow
 
         GL.Viewport(0, 0, ClientSize.X, ClientSize.Y);
 
-        controller?.Update(this, (float)args.Time);
+        controller?.Update(args.Time);
 
         RenderUI((float)args.Time);
 

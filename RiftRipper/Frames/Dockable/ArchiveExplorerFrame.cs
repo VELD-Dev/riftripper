@@ -50,7 +50,7 @@ internal class ArchiveExplorerFrame : DockableFrame
         ImGui.EndGroup();
 
         ImGui.SameLine();
-        ImGui.BeginChild("Preview", new Vector2(200, 0), true);
+        ImGui.BeginChild("Preview", new Vector2(200, 0));
 
         ImGui.EndChild();
     }

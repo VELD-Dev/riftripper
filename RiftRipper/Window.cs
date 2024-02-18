@@ -141,8 +141,8 @@ public class Window : GameWindow
             AddFrame(new AssignExtensionModal(this));
         }
 #endif
-        ImFontPtr ftptr = ImGui.GetIO().Fonts.AddFontFromFileTTF(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Assets", "Fonts", "Kanit", "Kanit-Regular.ttf"), 15);
-        ImGui.PushFont(ftptr);
+        //ImFontPtr ftptr = ImGui.GetIO().Fonts.AddFontFromFileTTF(Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Assets", "Fonts", "Kanit", "Kanit-Regular.ttf"), 15);
+        //ImGui.PushFont(ftptr);
     }
 
     protected override void OnResize(ResizeEventArgs e)

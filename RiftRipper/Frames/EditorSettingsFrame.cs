@@ -44,17 +44,18 @@ public class EditorSettingsFrame : Frame
         ImGui.Separator();
 
         ImGui.BeginGroup();
-        if(ImGui.Button("Apply and save"))
+        if (ImGui.Button("Apply and save"))
         {
             settings.SaveSettingsToFile();
+            SavingPopupHandler.Alert("Editor settings successfully saved.");
         }
         ImGui.SameLine();
-        if(ImGui.Button("Cancel"))
+        if (ImGui.Button("Cancel"))
         {
             settings.ReloadSettings();
         }
         ImGui.SameLine();
-        if(ImGui.Button("Close"))
+        if (ImGui.Button("Close"))
         {
             settings.ReloadSettings();
             isOpen = false;

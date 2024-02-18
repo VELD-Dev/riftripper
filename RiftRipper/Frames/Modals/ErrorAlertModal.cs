@@ -32,7 +32,7 @@ internal class ErrorAlertModal : Modal
             isOpen = !isOpen;
         ImGui.SameLine();
 #if WIN
-        if(ImGui.Button("Copy error & Report"))
+        if (ImGui.Button("Copy & Report"))
         {
             Clipboard.SetText(ErrorMessage);
             Process.Start(new ProcessStartInfo("https://github.com/VELD-Dev/riftripper/issues/new") { UseShellExecute = true });
@@ -47,7 +47,6 @@ internal class ErrorAlertModal : Modal
 
     public override void RenderAsWindow(float deltaTime)
     {
-        //ImGui.SetNextWindowSize(new Vector2(400, 200));
         base.RenderAsWindow(deltaTime);
     }
 }

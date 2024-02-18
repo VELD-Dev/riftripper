@@ -47,7 +47,6 @@ public class EditorSettingsFrame : Frame
         if(ImGui.Button("Apply and save"))
         {
             settings.SaveSettingsToFile();
-            SavingPopupHandler.Alert("Editor settings successfully saved.");
         }
         ImGui.SameLine();
         if(ImGui.Button("Cancel"))

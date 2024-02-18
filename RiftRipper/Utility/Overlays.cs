@@ -38,7 +38,7 @@ public class Overlays
         {
             ImGui.Text("Statistics");
             ImGui.Separator();
-            ImGui.Text($"Framerate: {Math.Round(ImGui.GetIO().Framerate)}FPS");
+            ImGui.Text($"Framerate: {wnd.Framerate}FPS");
             if (ImGui.BeginPopupContextWindow())
             {
                 if (ImGui.MenuItem("Custom", "", location == -1)) location = -1;

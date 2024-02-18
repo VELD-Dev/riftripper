@@ -8,7 +8,7 @@ internal class Program
     public const string AppDisplayName = "RiftRipper";
     public static Version version = new(0, 0, 2);
     public static string ProvidedPath;
-    public static string ProjectOpenPath = string.Empty;  // Console argument, will not be used for now.
+    public static string ProjectOpenPath;  // Console argument, will not be used for now.
 
 #if WIN
     public static bool isExtAssociated = ExtensionManager.IsAssociated(".rift", AppName);

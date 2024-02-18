@@ -45,10 +45,17 @@ internal static class FileMenuDraw
             return;
 
         var res = FileDialog.OpenFile("Open project", ".rift");
-        if (res.Length < 1 || res == string.Empty)
+        if (res.Length < 0)
             return;
 
-        wnd.openedProject = Project.OpenFromFile(res);
+        try
+        {
+            wnd.openedProject = Project.OpenFromFile(res);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
     }
 
     internal static void CloseActiveProjectMenuItem(Window wnd)

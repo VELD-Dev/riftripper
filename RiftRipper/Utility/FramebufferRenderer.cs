@@ -6,8 +6,8 @@ internal class FramebufferRenderer : IDisposable  // Inspired by Replanetizer's 
 {
     public static uint MSAA_LEVEL
     {
-        get { return Window.Singleton.Settings.MSAA_Level; }
-        set { Window.Singleton.Settings.MSAA_Level = value; }
+        get { return Window.mainInstance.Settings.MSAA_Level; }
+        set { Window.mainInstance.Settings.MSAA_Level = value; }
     }
     private int internalMsaaLevel;
 

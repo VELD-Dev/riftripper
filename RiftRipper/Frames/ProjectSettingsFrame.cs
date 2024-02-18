@@ -42,7 +42,6 @@ public class ProjectSettingsFrame : Frame
         if(ImGui.Button("Save"))
         {
             loadedProject.SaveToFile(loadedProject.ProjectFilePath);
-            SavingPopupHandler.Alert("Project settings successuflly saved.", "Project settings");
         }
         ImGui.SameLine();
         if(ImGui.Button("Cancel"))
@@ -59,11 +58,10 @@ public class ProjectSettingsFrame : Frame
 
     public override void RenderAsWindow(float deltaTime)
     {
-        if(window.openedProject == null || loadedProject == null)
+        if(window.openedProject == null)
         {
             isOpen = false;
             loadedProject = null;
-            return;
         }
 
         ImGui.SetNextWindowSize(new System.Numerics.Vector2(800, 600));

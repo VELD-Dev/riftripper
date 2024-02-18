@@ -1,6 +1,4 @@
-﻿using RiftRipper.Frames.Debug;
-
-namespace RiftRipper.Drawing;
+﻿namespace RiftRipper.Drawing;
 
 internal static class DebugMenuDraw
 {
@@ -20,14 +18,10 @@ internal static class DebugMenuDraw
     {
         internal static void DebugMenuItem(Window wnd)
         {
-            if (ImGui.MenuItem("Debug frame"))
-            {
-                wnd.AddFrame(new DemoWindowFrame(wnd));
-            }
-            if(ImGui.MenuItem("Style frame"))
-            {
-                wnd.AddFrame(new StyleWindowFrame(wnd));
-            }
+            if (!ImGui.MenuItem("Demo frame"))
+                return;
+
+            wnd.AddFrame(new DemoWindowFrame(wnd));
         }
     }
 }

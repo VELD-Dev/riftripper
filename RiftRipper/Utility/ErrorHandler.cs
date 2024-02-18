@@ -14,7 +14,7 @@ internal static class ErrorHandler
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine(message);
         Console.ResetColor();
-        Window.Singleton.AddFrame(new ErrorAlertModal(Window.Singleton, message, textWrapped));
+        Window.mainInstance.AddFrame(new ErrorAlertModal(Window.mainInstance, message, textWrapped));
     }
 
     public static void Alert(Exception ex, bool textWrapped = false)

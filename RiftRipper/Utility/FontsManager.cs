@@ -17,51 +17,9 @@ unsafe public static class FontsManager
         { "KanitBold",  KanitBold }
     };
 
-    /// <summary>
-    /// Discover fonts in the dir and subdirs for the path.
-    /// </summary>
-    /// <param name="path">Full path to the file.</param>
-    /// <returns>Array of paths pointing to the fonts files.</returns>
-    public static string[] DiscoverFonts(string path)
-    {
-        var filepaths = Directory.GetFiles(path).ToList();
-        List<string> fontpaths = new();
-        foreach (var filepath in filepaths)
-        {
-            if (!File.Exists(filepath))
-                continue;
-
-            if (!filepath.EndsWith(".ttf") || !filepath.EndsWith(".otf"))
-                continue;
-
-            fontpaths.Add(filepath);
-        }
-        var subdirs = Directory.GetDirectories(path).ToList();
-        foreach(var dir in subdirs)
-        {
-            if (!Directory.Exists(dir))
-                continue;
-            filepaths = Directory.GetFiles(dir).ToList();
-            foreach(var filepath in filepaths)
-            {
-                if (!File.Exists(filepath))
-                    continue;
-
-                if (!filepath.EndsWith(".ttf") || !filepath.EndsWith(".otf"))
-                    continue;
-
-                if (fontpaths.Contains(filepath) || fontpaths.Any(str => str.Split(Path.PathSeparator).Last() == filepath.Split(Path.PathSeparator).Last()))
-                    continue;
-
-                fontpaths.Add(filepath);
-            }
-        }
-        return fontpaths.ToArray();
-    }
-
     public static ImFontPtr LoadDefaultFont(string fontName, string fontPath, float size = 15f)
     {
-        ImFontConfig config = new()
+        ImFontConfig config = new ImFontConfig()
         { 
             FontDataOwnedByAtlas = 0,
             RasterizerMultiply = 1

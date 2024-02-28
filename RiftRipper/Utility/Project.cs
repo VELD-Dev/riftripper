@@ -22,6 +22,7 @@ public class Project
     public string Description;
     public string Version;
     public string AuthorUrl = string.Empty;
+    public string ProjectFilePath { get; private set; }
 
     [SetsRequiredMembers]
     public Project(string id)
@@ -40,11 +41,25 @@ public class Project
         AuthorUrl = authorUrl;
     }
 
+    public Project ReloadProject()
+    {
+        if (ProjectFilePath == null)
+        {
+            var ex = new NullReferenceException("The project file path is null.");
+            ErrorHandler.Alert(ex);
+            return null;
+        }
+
+        JsonConvert.PopulateObject(File.ReadAllText(ProjectFilePath), this);
+        return this;
+    }
+
     public Project SaveToFile(string path)
     {
-        string output = JsonConvert.SerializeObject(this, Formatting.Indented); 
+        string output = JsonConvert.SerializeObject(this, Formatting.Indented);
 
         File.WriteAllText(path, output);
+        ProjectFilePath = path;
         return this;
     }
 
@@ -53,7 +68,8 @@ public class Project
         if(File.Exists(path))
         {
             Project projectToLoad = JsonConvert.DeserializeObject<Project>(File.ReadAllText(path));
-            return (Project)projectToLoad;
+            projectToLoad.ProjectFilePath = path;
+            return projectToLoad;
         }
         else
         {
@@ -78,13 +94,18 @@ public class Project
         }
         if (File.Exists(path))
         {
-            project = JsonConvert.DeserializeObject<Project>(File.ReadAllText(path));
-            return true;
+            try
+            {
+                project = JsonConvert.DeserializeObject<Project>(File.ReadAllText(path));
+                project.ProjectFilePath = path;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                ErrorHandler.Alert(ex.Message);
+            }
         }
-        else
-        {
-            project = null;
-            return false;
-        }
+        project = null;
+        return false;
     }
 }

@@ -9,11 +9,10 @@ Riftripper is a tool made in C# to view, extract and edit maps of R**atchet and 
 ### RiftRipper is still in a *very early state* and some expected features *may not work or may not be implemented at all*. All the bug reports are appreciated though.
 
 ## Summary
-* 🌐 [*General information*](#-general-information)
-  * ✅ [**Compatibility list**](#-compatibility-list)
-* 🌃 [**About Nightly Builds**](#-about-nightly-builds) (It's very important, **READ THIS PART**)
-  * 🚧 [**TODO list** (features working in Nightly builds)](#-todo-list-features-working-in-nightly-builds)
-* ℹ️ [*v1.0.0 Information*](#ℹ️-v100-information)
+* 🌐 [**General information**](#-general-information)
+  * ✅ [*Compatibility list*](#-compatibility-list)
+  * 🌃 [*About Nightly Builds*](#-about-nightly-builds) (It's very important, **READ THIS PART**)
+  * 🚧 [*TODO list (features working in Nightly builds)*](#-todo-list-features-working-in-nightly-builds)
   * 🔑 [*Key Features for the v1.0.0*](#-todo-list--features-for-the-v100)
 * 📥 [**Installation**](#-installation)
 
@@ -26,17 +25,17 @@ General information about the software, such as the compatibility list.
 - ✅ Ratchet & Clank: Rift Apart (PC)
 - ❔ Ratchet & Clank: Rift Apart (PS5)
 - ❔ Ratchet & Clank (2016)
-- ❌ Marvel's Spider-Man (2018)
-- ❔ Marvel's Spider-Man: Miles Morales
+- ❔ Marvel's Wolverine<sup>1</sup> (2026)
 - ❔ Marvel's Spider-Man 2 (2023)
-- ❔ Marvel's Wolverine<sup>1</sup>  
+- ❔ Marvel's Spider-Man: Miles Morales
+- ❌ Marvel's Spider-Man (2018) 
   
 ✅: Compatibility will be ensured.  
-❔: Compatibility will be defined depending on the game engine version, if it is close enough to RiftRipper extracting and editing library.  
+❔: Compatibility will be defined depending on the game engine version, if it is close enough to what the RiftRipper extracting and editing library can support.  
 ❌: Compatibility will not be ensured or will not be checked, or the compatibility will be impossible because of the engine version.  
 > <sup>1</sup><sub>Wolverine should be supported on its launch, but the compatibility status may change on release and become incompatible.</sub>
 
-# 🌃 About Nightly Builds
+## 🌃 About Nightly Builds
 Nightly builds are highly unstable builds that are updated on every single change made to the editor.  
 Soon, an auto-updating system will be incorporated to RiftRipper and you will be able to choose your update channel: **nightly** or **release**.  
 The nightly channel is recommended only for developers, because it has debug and symbol files, and it may slow your experience using it.  
@@ -46,15 +45,15 @@ The nightly channel is recommended only for developers, because it has debug and
 
 ## 🚧 TODO list *(features working in Nightly builds)*
 All the features here are listed in the order they will be done.
-- `[30-05-2023]` Project creation.
 - [x] `[08-06-2023]` Project creation and loading.
 - [x] `[12-06-2023]` Editor settings saving.
 - *Little pause, waiting for the game to release on PC and some reverse engineering to be done.*
-- [ ] 🚧 Read `DAT1` files without extracting those.
+- [x] `[06/02/2024]` General UI and code cleanup. Project settings improvements.
+- [ ] 🚧 Level viewing.
+  - [ ] *Probably a huge optimization part.*
+- [ ] 🕰️ Read `DAT1` files without extracting those.
 - [ ] Archives explorer without extraction.
 - [ ] Archives selective extraction.
-- [ ] Level viewing.
-  - [ ] *Probably a huge optimization part.*
 - [ ] Level extracting to wavefront (`.obj`) files.
 - [ ] Level editing.
 - [ ] Duplicating objects.
@@ -70,15 +69,13 @@ All the features here are listed in the order they will be done.
 - [ ] Create portals to move to different levels. *(It should probably be possible)*
 - [ ] We'll see in the future when I'll get there.
 
-# ℹ️ v1.0.0 Information
-
 ## 🔑 TODO List / features for the `v1.0.0`
 - ✅ Open and view a level.
-- ✅ Extract the model as an OBJ or FBX model.
-- ✅ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
+- ✅ Extract models and levels as OBJ or FBX model files.
 - ❔ Extract the textures.
 - ❔ Repack the edits in a new file with new TOC/DAG files in order to just have to replace the orginal DAG and TOC instead of re-downloading the entire game.
 - ❔ Edit the levels and save the edits in the original level or in a project file.
+- ❌ Repack the edits in the orginal file without editing the DAG/TOC hyperlinks files.
 - ❌ Edit instance parameters of entities.
 - ❌ Make new portals of any kind (on Ratchet & Clank: Rift Apart).
 - ❌ Bundle several mods without breaking other mods (for that, users will have to edit themselves the mods to bundle those together).
@@ -89,7 +86,7 @@ All the features here are listed in the order they will be done.
 - ⚔️ Swap/change/edit entities models<sup>**1**</sup>.  
   
 ✅: Will be supported, at least for **Ratchet & Clank: Rift Apart**.  
-❔: Depending on what is being discovered and reversed, and depending on the events, it may possibly be supported. So maybe.  
+❔: Depending on what is being discovered and reversed, and depending on the events, it may possibly be supported. So, maybe.  
 ❌: Will for sure **not** be support for this version. Maybe in the future ?  
 ⚔️: Will not be handled by the level editor. **You better check for an other tool.**
 

@@ -28,8 +28,8 @@ public static class ExtensionManager
         }
         catch(Exception ex)
         {
-            Console.WriteLine("Impossible to dissociate the extension. Try running the program as administrator.");
-            Console.WriteLine(ex.ToString());
+            var e = new UnauthorizedAccessException("Extension dissociation impossible. Restarting Riftripper as administrator and retrying may fix this, otherwise report.", ex);
+            ErrorHandler.Alert(e);
         }
         return !IsAssociated(Extension, KeyName);
     }
@@ -56,7 +56,8 @@ public static class ExtensionManager
         }
         catch ( Exception ex )
         {
-            ErrorHandler.Alert($"Extension association impossible: You must run this program as administrator.\n{ex}", false);
+            var e = new UnauthorizedAccessException("Extension association impossible. Restarting Riftripper as administrator and retrying may fix this, otherwise report.", ex);
+            ErrorHandler.Alert(e, false);
         }
 
 

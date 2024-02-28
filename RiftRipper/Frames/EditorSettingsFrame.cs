@@ -26,9 +26,9 @@ public class EditorSettingsFrame : Frame
 
         ImGui.SeparatorText("Advanced");
 
-        ImGui.BeginGroup();
 #if WIN
-        if(ExtensionManager.IsAssociated(".rift", Program.AppName))
+        ImGui.BeginGroup();
+        if (ExtensionManager.IsAssociated(".rift", Program.AppName))
         {
             if (ImGui.Button("Dissociate .rift files from app"))
                 ExtensionManager.TryDissociateExtension(".rift", Program.AppName);
@@ -38,23 +38,24 @@ public class EditorSettingsFrame : Frame
             if (ImGui.Button("Associate .rift files to the app"))
                 ExtensionManager.AssociateExtension(".rift", "RiftRipper Project", Program.AppName);
         }
-#endif
         ImGui.EndGroup();
+#endif
 
         ImGui.Separator();
 
         ImGui.BeginGroup();
-        if(ImGui.Button("Apply and save"))
+        if (ImGui.Button("Apply and save"))
         {
             settings.SaveSettingsToFile();
+            SavingPopupHandler.Alert("Editor settings successfully saved.");
         }
         ImGui.SameLine();
-        if(ImGui.Button("Cancel"))
+        if (ImGui.Button("Cancel"))
         {
             settings.ReloadSettings();
         }
         ImGui.SameLine();
-        if(ImGui.Button("Close"))
+        if (ImGui.Button("Close"))
         {
             settings.ReloadSettings();
             isOpen = false;

@@ -100,10 +100,7 @@ public static class FileDialog
         process.StartInfo.UseShellExecute = false;
         process.StartInfo.RedirectStandardOutput = true;
         process.StartInfo.RedirectStandardError = true;
-        foreach (string arg in args)
-        {
-            process.StartInfo.ArgumentList.Add(arg);
-        }
+        process.StartInfo.ArgumentList.Union(args);
         process.Start();
         string output = process.StandardOutput.ReadToEnd();
         process.StandardError.ReadToEnd();

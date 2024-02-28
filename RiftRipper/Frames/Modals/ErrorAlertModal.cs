@@ -5,11 +5,7 @@ namespace RiftRipper.Frames.Modals;
 internal class ErrorAlertModal : Modal
 {
     protected override string frameName { get; set; } = "An error occurred";
-    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.Modal
-        | ImGuiWindowFlags.AlwaysAutoResize
-        | ImGuiWindowFlags.NoDocking
-        | ImGuiWindowFlags.NoResize
-        | ImGuiWindowFlags.NoCollapse;
+    protected override ImGuiWindowFlags window_flags { get; set; } = ImGuiWindowFlags.NoResize;
 
     public readonly string ErrorMessage;
     private bool isTextWrapped = false;
@@ -29,14 +25,14 @@ internal class ErrorAlertModal : Modal
             ImGui.Text(ErrorMessage);
         ImGui.Spacing();
 
-        ImGui.Text("Do not forget to screenshot this message if y");
+        ImGui.Text("You can report this error to veld.dev on Discord, or create a new issue.\nBe careful, do not make duplicates.");
         ImGui.Spacing();
 
         if (ImGui.Button("OK"))
             isOpen = !isOpen;
         ImGui.SameLine();
 #if WIN
-        if(ImGui.Button("Copy error & Report"))
+        if (ImGui.Button("Copy & Report"))
         {
             Clipboard.SetText(ErrorMessage);
             Process.Start(new ProcessStartInfo("https://github.com/VELD-Dev/riftripper/issues/new") { UseShellExecute = true });
@@ -51,7 +47,6 @@ internal class ErrorAlertModal : Modal
 
     public override void RenderAsWindow(float deltaTime)
     {
-        //ImGui.SetNextWindowSize(new Vector2(400, 200));
         base.RenderAsWindow(deltaTime);
     }
 }

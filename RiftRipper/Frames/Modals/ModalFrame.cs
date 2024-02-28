@@ -10,5 +10,6 @@ public abstract class Modal : Frame
 {
     protected Modal(Window window) : base(window)
     {
+        window_flags |= ImGuiWindowFlags.Modal | ImGuiWindowFlags.AlwaysAutoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoDocking | ImGuiWindowFlags.UnsavedDocument;
     }
 }
